@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Соленый сад">
+  <rect width="64" height="64" rx="14" fill="#27221b"/>
+  <path d="M23 16h18v7c0 3-2 5-5 5h-8c-3 0-5-2-5-5v-7z" fill="#11100d"/>
+  <path d="M19 26h26l-2 25c-.2 3-2.6 5-5.6 5H26.6c-3 0-5.4-2-5.6-5L19 26z" fill="#fff3df"/>
+  <path d="M23 31h18l-1.4 17.5c-.1 1.6-1.4 2.8-3 2.8h-9.2c-1.6 0-2.9-1.2-3-2.8L23 31z" fill="#7c2d28"/>
+  <path d="M22 25c3 4 17 4 20 0" fill="none" stroke="#a8895d" stroke-width="3" stroke-linecap="round"/>
+  <path d="M24 21h16" stroke="#a8895d" stroke-width="3" stroke-linecap="round"/>
+</svg>

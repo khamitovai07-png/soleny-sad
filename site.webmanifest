@@ -1,0 +1,16 @@
+{
+  "name": "Соленый сад",
+  "short_name": "Соленый сад",
+  "description": "Ферментированные закуски к русскому столу.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f0e4d3",
+  "theme_color": "#27221b",
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "64x64",
+      "type": "image/svg+xml"
+    }
+  ]
+}
