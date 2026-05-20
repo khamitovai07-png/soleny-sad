@@ -205,8 +205,12 @@ h3 {
 }
 
 .button-primary {
-  background: var(--charcoal);
-  color: var(--milk);
+  color: var(--charcoal);
+  background:
+    linear-gradient(180deg, rgba(255, 249, 239, 0.94), rgba(244, 234, 220, 0.94)),
+    var(--milk);
+  border-color: rgba(85, 63, 38, 0.28);
+  box-shadow: 0 10px 24px rgba(45, 34, 22, 0.08);
 }
 
 .button-secondary {
@@ -217,7 +221,7 @@ h3 {
 .button-light {
   color: var(--charcoal);
   background: var(--milk);
-  border-color: var(--milk);
+  border-color: rgba(85, 63, 38, 0.2);
 }
 
 .hero-media {
@@ -537,7 +541,8 @@ h3 {
 
 .sets-section {
   background:
-    linear-gradient(180deg, #e5d5c0, #d8c4a7);
+    linear-gradient(180deg, rgba(255, 249, 239, 0.72), rgba(240, 228, 211, 0.42)),
+    var(--paper);
 }
 
 .compact-heading {
@@ -607,26 +612,50 @@ h3 {
 }
 
 .craft-grid article {
-  min-height: 340px;
+  min-height: 440px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   border: 1px solid var(--line);
   border-radius: 8px;
-  padding: 24px;
-  background:
-    radial-gradient(circle at 72% 12%, rgba(255, 249, 239, 0.85), transparent 28%),
-    #eadbc7;
+  padding: 16px 16px 24px;
+  overflow: hidden;
+  background: var(--milk);
   box-shadow: 0 18px 44px rgba(45, 34, 22, 0.08);
 }
 
+.craft-photo {
+  height: 190px;
+  margin: 0 0 22px;
+  border-radius: 7px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, #fbf5ec, #eadbc7);
+}
+
+.craft-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.craft-grid article:nth-child(3) .craft-photo img {
+  object-fit: contain;
+  padding: 12px;
+}
+
 .craft-grid span {
-  margin-bottom: auto;
+  display: block;
+  margin-bottom: 70px;
   color: var(--beet);
   font-size: 12px;
   font-weight: 900;
   letter-spacing: 0.16em;
   text-transform: uppercase;
+}
+
+.craft-grid h3 {
+  margin-top: auto;
 }
 
 .craft-grid p {
@@ -902,8 +931,83 @@ h3 {
   line-height: 1.5;
 }
 
+.contacts-section {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.8fr) minmax(420px, 1.2fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: stretch;
+  background:
+    linear-gradient(180deg, rgba(255, 249, 239, 0.7), rgba(240, 228, 211, 0.28)),
+    var(--paper);
+}
+
+.contacts-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contacts-copy p:not(.eyebrow) {
+  max-width: 560px;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.58;
+}
+
+.contacts-grid {
+  align-self: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.contacts-grid a {
+  min-height: 230px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 22px;
+  background: var(--milk);
+  box-shadow: 0 18px 44px rgba(45, 34, 22, 0.08);
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+
+.contacts-grid a:hover {
+  transform: translateY(-3px);
+  border-color: rgba(133, 58, 52, 0.28);
+}
+
+.contacts-grid span {
+  color: var(--beet);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.contacts-grid strong {
+  margin-top: auto;
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(23px, 1.7vw, 30px);
+  font-weight: 400;
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+}
+
+.contacts-grid small {
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.35;
+}
+
 .order-section {
-  background: #e5d5c0;
+  background:
+    linear-gradient(180deg, rgba(255, 249, 239, 0.72), rgba(240, 228, 211, 0.34)),
+    var(--paper);
 }
 
 .order-card {
@@ -948,8 +1052,9 @@ h3 {
   justify-content: center;
   margin-bottom: 16px;
   border-radius: 50%;
-  color: var(--milk);
-  background: var(--charcoal);
+  color: var(--beet);
+  background: rgba(255, 249, 239, 0.82);
+  border: 1px solid rgba(133, 58, 52, 0.2);
   font-size: 13px;
   font-weight: 900;
 }
@@ -1015,6 +1120,7 @@ h3 {
   .story-section,
   .benefits-section,
   .gift-section,
+  .contacts-section,
   .order-card,
   .delivery-section {
     grid-template-columns: 1fr;
@@ -1035,6 +1141,7 @@ h3 {
   .reviews-grid,
   .occasion-grid,
   .faq-list,
+  .contacts-grid,
   .order-steps {
     grid-template-columns: 1fr;
   }

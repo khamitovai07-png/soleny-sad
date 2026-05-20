@@ -41,11 +41,13 @@
 
 .craft-grid span {
   display: block;
-  margin-bottom: 70px;
+  margin-bottom: 28px;
 }
 
 .craft-grid h3 {
-  margin-top: auto;
+  margin-top: 0;
+  margin-bottom: 12px;
+  max-width: 92%;
 }
 
 @media (max-width: 720px) {
