@@ -933,7 +933,7 @@ h3 {
 
 .contacts-section {
   display: grid;
-  grid-template-columns: minmax(320px, 0.8fr) minmax(420px, 1.2fr);
+  grid-template-columns: minmax(300px, 0.72fr) minmax(560px, 1.28fr);
   gap: clamp(24px, 4vw, 56px);
   align-items: stretch;
   background:
@@ -991,10 +991,10 @@ h3 {
   margin-top: auto;
   color: var(--ink);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(23px, 1.7vw, 30px);
+  font-size: clamp(18px, 1.22vw, 23px);
   font-weight: 400;
   line-height: 1.05;
-  overflow-wrap: anywhere;
+  white-space: nowrap;
 }
 
 .contacts-grid small {
