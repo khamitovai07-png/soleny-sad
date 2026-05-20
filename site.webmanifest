@@ -1,7 +1,7 @@
 {
   "name": "Соленый сад",
   "short_name": "Соленый сад",
-  "description": "Ферментированные закуски к русскому столу.",
+  "description": "Ферментированные овощи, моченые фрукты и ягоды к русскому столу.",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#f0e4d3",
