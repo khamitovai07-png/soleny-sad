@@ -16,7 +16,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
   <link rel="stylesheet" href="styles.css?v=20260520-contactline">
-  <link rel="stylesheet" href="craft.css?v=20260520-align">
+  <link rel="stylesheet" href="craft.css?v=20260527-process">
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -353,36 +353,54 @@
       </div>
     </section>
 
-    <section class="section craft-section">
+    <section class="section craft-section process-section" id="process">
       <div class="section-heading compact-heading">
-        <p class="eyebrow">как мы делаем</p>
-        <h2>Маленькие партии, чистый состав, холодное хранение</h2>
+        <p class="eyebrow">от рассола до подарка</p>
+        <h2>Мини-история о том, как баночка становится готовым набором</h2>
       </div>
-      <div class="craft-grid">
-        <article>
-          <div class="craft-photo">
-            <img src="assets/images/product-assorti.jpg" alt="Баночка ассорти из ферментированных овощей">
-          </div>
-          <span>овощи</span>
-          <h3>Берем сезонную основу</h3>
-          <p>Капуста, свекла, огурцы, яблоки, терн и грибы идут в работу небольшими партиями, чтобы вкус оставался выразительным.</p>
-        </article>
-        <article>
-          <div class="craft-photo">
-            <img src="assets/images/product-pickles.png" alt="Баночка огурцов в прозрачном рассоле">
-          </div>
-          <span>рассол</span>
-          <h3>Ферментируем без уксуса</h3>
-          <p>Соль, специи и время дают естественную кислинку, плотную текстуру и глубокий вкус.</p>
-        </article>
-        <article>
-          <div class="craft-photo">
-            <img src="assets/images/jars-gift-box.png" alt="Подарочная коробка с маленькими стеклянными баночками">
-          </div>
-          <span>банка</span>
-          <h3>Упаковываем как подарок</h3>
-          <p>Стекло, темная ткань, веревка и спокойная этикетка превращают заготовку в гастрономический деликатес.</p>
-        </article>
+      <div class="process-layout">
+        <div class="process-steps" aria-label="Этапы приготовления">
+          <button class="process-step is-active" type="button" data-step="0">
+            <span>01 / овощи</span>
+            <strong>Выбираем сезонную основу</strong>
+            <p>Капуста, свекла, огурцы, яблоки и ягоды идут в небольшие партии, чтобы вкус оставался живым.</p>
+          </button>
+          <button class="process-step" type="button" data-step="1">
+            <span>02 / рассол</span>
+            <strong>Собираем соль и специи</strong>
+            <p>Без уксуса и тяжелых маринадов: только рассол, пряности и аккуратная кислотность.</p>
+          </button>
+          <button class="process-step" type="button" data-step="2">
+            <span>03 / время</span>
+            <strong>Даем ферментации созреть</strong>
+            <p>В прохладе вкус становится глубже, цвет плотнее, а текстура сохраняет приятный хруст.</p>
+          </button>
+          <button class="process-step" type="button" data-step="3">
+            <span>04 / подарок</span>
+            <strong>Упаковываем как гастрономический сет</strong>
+            <p>Стекло, темная ткань, веревка и спокойная этикетка превращают заготовку в красивый подарок.</p>
+          </button>
+        </div>
+
+        <div class="process-stage" aria-live="polite">
+          <figure class="process-frame is-active" data-frame="0">
+            <img src="assets/images/product-assorti.jpg" alt="Ассорти из ферментированных овощей в стеклянной банке">
+            <figcaption>Сезонная основа</figcaption>
+          </figure>
+          <figure class="process-frame" data-frame="1">
+            <img src="assets/images/product-pickles.png" alt="Огурцы в прозрачном рассоле с укропом">
+            <figcaption>Рассол и специи</figcaption>
+          </figure>
+          <figure class="process-frame" data-frame="2">
+            <img src="assets/images/product-tern.jpg" alt="Баночка ферментированного терна глубокого ягодного цвета">
+            <figcaption>Время и прохлада</figcaption>
+          </figure>
+          <figure class="process-frame" data-frame="3">
+            <img src="assets/images/jars-gift-box.png" alt="Подарочная коробка с маленькими баночками Соленый сад">
+            <figcaption>Готовый набор</figcaption>
+          </figure>
+          <div class="process-light" aria-hidden="true"></div>
+        </div>
       </div>
     </section>
 
@@ -564,5 +582,33 @@
       <a href="https://wa.me/79872528311" target="_blank" rel="noreferrer">WhatsApp</a>
     </div>
   </footer>
+  <script>
+    (() => {
+      const steps = [...document.querySelectorAll(".process-step")];
+      const frames = [...document.querySelectorAll(".process-frame")];
+      if (!steps.length || !frames.length) return;
+
+      const setActive = (index) => {
+        steps.forEach((step, current) => step.classList.toggle("is-active", current === index));
+        frames.forEach((frame, current) => frame.classList.toggle("is-active", current === index));
+      };
+
+      steps.forEach((step, index) => {
+        step.addEventListener("click", () => setActive(index));
+        step.addEventListener("focus", () => setActive(index));
+      });
+
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver((entries) => {
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+          if (visible) setActive(Number(visible.target.dataset.step));
+        }, { threshold: [0.45, 0.65], rootMargin: "-20% 0px -30%" });
+
+        steps.forEach((step) => observer.observe(step));
+      }
+    })();
+  </script>
 </body>
 </html>
