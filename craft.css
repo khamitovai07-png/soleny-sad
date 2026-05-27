@@ -173,27 +173,6 @@
   font-weight: 800;
 }
 
-.jar-label {
-  position: absolute;
-  left: 38.5%;
-  top: 65%;
-  z-index: 2;
-  width: min(16vw, 210px);
-  min-width: 138px;
-  padding: 9px 12px 8px;
-  border: 1px solid rgba(85, 63, 38, 0.28);
-  border-radius: 4px;
-  color: #3f3122;
-  background: rgba(248, 238, 221, 0.92);
-  box-shadow: 0 10px 18px rgba(50, 37, 23, 0.12);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(15px, 1.25vw, 20px);
-  line-height: 1.05;
-  text-align: center;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-
 .process-light {
   position: absolute;
   inset: -30%;
@@ -249,11 +228,4 @@
     bottom: 16px;
   }
 
-  .jar-label {
-    left: 38%;
-    top: 65%;
-    min-width: 104px;
-    padding: 7px 9px;
-    font-size: 13px;
-  }
 }
