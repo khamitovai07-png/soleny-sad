@@ -30,6 +30,10 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+body:has(.welcome-gate:not(.is-hidden)) {
+  overflow: hidden;
+}
+
 img {
   display: block;
   max-width: 100%;
@@ -46,13 +50,230 @@ a {
   z-index: 20;
   height: 76px;
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: 1fr auto auto 1fr;
   align-items: center;
   gap: 24px;
   padding: 0 clamp(20px, 4vw, 56px);
   border-bottom: 1px solid rgba(65, 49, 30, 0.13);
   background: rgba(240, 228, 211, 0.84);
   backdrop-filter: blur(18px);
+}
+
+.welcome-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(circle at 22% 18%, rgba(168, 137, 93, 0.22), transparent 34%),
+    radial-gradient(circle at 78% 70%, rgba(124, 45, 40, 0.22), transparent 32%),
+    linear-gradient(135deg, rgba(39, 34, 27, 0.84), rgba(79, 101, 61, 0.82));
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 260ms ease, visibility 260ms ease;
+}
+
+.welcome-gate.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.welcome-gate.is-celebrating .welcome-panel {
+  animation: welcomePanelPop 520ms cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+.welcome-panel {
+  position: relative;
+  width: min(520px, 100%);
+  border: 1px solid rgba(255, 249, 239, 0.34);
+  border-radius: 10px;
+  padding: clamp(28px, 5vw, 46px);
+  color: var(--ink);
+  text-align: center;
+  background:
+    linear-gradient(180deg, rgba(255, 249, 239, 0.96), rgba(240, 228, 211, 0.95)),
+    var(--milk);
+  box-shadow: 0 34px 90px rgba(20, 15, 10, 0.34);
+}
+
+.welcome-panel h2 {
+  margin: 0 auto;
+  font-size: clamp(42px, 7vw, 66px);
+  line-height: 0.98;
+}
+
+.welcome-panel p:not(.eyebrow) {
+  max-width: 370px;
+  margin: 18px auto 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.welcome-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  margin-top: 28px;
+  border: 1px solid rgba(39, 34, 27, 0.22);
+  border-radius: 999px;
+  padding: 0 28px;
+  color: var(--milk);
+  background:
+    linear-gradient(180deg, rgba(139, 55, 48, 0.96), rgba(103, 37, 32, 0.96)),
+    var(--beet);
+  box-shadow: 0 16px 34px rgba(124, 45, 40, 0.28);
+  cursor: pointer;
+  font: inherit;
+  font-size: 17px;
+  font-weight: 900;
+  overflow: visible;
+  transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+}
+
+.welcome-button::before,
+.welcome-button::after {
+  position: absolute;
+  top: 50%;
+  color: var(--beet);
+  font-size: 20px;
+  line-height: 1;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-50%) scale(0.8);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.welcome-button::before {
+  content: "♪";
+  left: -26px;
+}
+
+.welcome-button::after {
+  content: "♫";
+  right: -28px;
+}
+
+.welcome-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 42px rgba(124, 45, 40, 0.34);
+  filter: saturate(1.06);
+}
+
+.welcome-button:hover::before,
+.welcome-button:hover::after {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.welcome-button.is-scattering {
+  animation: buttonScatter 560ms cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
+}
+
+.welcome-button:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 10px 22px rgba(124, 45, 40, 0.24);
+}
+
+.welcome-button.is-scattering::before,
+.welcome-button.is-scattering::after {
+  opacity: 0;
+}
+
+.music-burst-note {
+  position: absolute;
+  left: calc(50% + var(--burst-x, 0px));
+  top: calc(100% - 34px + var(--burst-y, 0px));
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  color: var(--burst-color, var(--beet));
+  background: rgba(255, 249, 239, 0.88);
+  box-shadow: 0 10px 22px rgba(54, 37, 19, 0.14);
+  font-size: 18px;
+  font-weight: 900;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.55);
+  animation: musicBurst 900ms cubic-bezier(0.14, 0.8, 0.18, 1) forwards;
+}
+
+.music-burst-note.is-veggie {
+  width: var(--piece-width, 20px);
+  height: var(--piece-height, 12px);
+  border-radius: var(--piece-radius, 999px);
+  color: transparent;
+  background:
+    radial-gradient(circle at 26% 28%, rgba(255, 255, 255, 0.42), transparent 26%),
+    var(--burst-color, var(--leaf));
+  box-shadow: 0 10px 18px rgba(54, 37, 19, 0.16);
+}
+
+.music-burst-note.is-dot {
+  width: 12px;
+  height: 12px;
+  color: transparent;
+  background: var(--burst-color, var(--gold));
+}
+
+@keyframes welcomePanelPop {
+  0% {
+    transform: scale(1);
+  }
+
+  45% {
+    transform: scale(1.025);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes buttonScatter {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: saturate(1);
+  }
+
+  38% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.04);
+    filter: saturate(1.18);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.78);
+    filter: saturate(1.2);
+  }
+}
+
+@keyframes musicBurst {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.45) rotate(0deg);
+  }
+
+  16% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translate(calc(-50% + var(--burst-dx)), calc(-50% + var(--burst-dy)))
+      scale(1.18)
+      rotate(var(--burst-rotate));
+  }
 }
 
 .brand {
@@ -90,6 +311,44 @@ a {
   font-size: 14px;
   font-weight: 700;
   background: rgba(255, 249, 239, 0.58);
+}
+
+.music-toggle {
+  justify-self: end;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(39, 34, 27, 0.2);
+  border-radius: 50%;
+  color: var(--beet);
+  background: rgba(255, 249, 239, 0.68);
+  cursor: pointer;
+  font: inherit;
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1;
+  transition: transform 180ms ease, background-color 180ms ease, color 180ms ease;
+}
+
+.music-toggle:hover,
+.music-toggle.is-playing {
+  color: var(--milk);
+  background: var(--beet);
+  transform: translateY(-1px);
+}
+
+.music-toggle.is-playing span {
+  display: inline-block;
+  animation: musicPulse 760ms ease-in-out infinite alternate;
+}
+
+@keyframes musicPulse {
+  from {
+    transform: scale(1) rotate(-6deg);
+  }
+
+  to {
+    transform: scale(1.16) rotate(8deg);
+  }
 }
 
 .hero {
@@ -1105,7 +1364,7 @@ h3 {
 
 @media (max-width: 1100px) {
   .site-header {
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto 1fr auto;
   }
 
   .main-nav {
@@ -1163,11 +1422,22 @@ h3 {
 @media (max-width: 720px) {
   .site-header {
     height: auto;
-    display: block;
+    display: grid;
+    grid-template-columns: 1fr auto;
     padding: 18px 20px;
   }
 
+  .brand {
+    align-self: center;
+  }
+
+  .music-toggle {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
   .main-nav {
+    grid-column: 1 / -1;
     margin-top: 14px;
     gap: 14px;
     overflow-x: auto;

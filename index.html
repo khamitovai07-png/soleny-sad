@@ -34,6 +34,15 @@
   </script>
 </head>
 <body>
+  <div class="welcome-gate" id="welcomeGate" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
+    <div class="welcome-panel">
+      <p class="eyebrow">теплый русский стол</p>
+      <h2 id="welcomeTitle">Добро пожаловать</h2>
+      <p>Нажмите кнопку, и сайт зазвучит веселой балалаечной мелодией.</p>
+      <button class="welcome-button" id="welcomeButton" type="button">Играй, балалайка!</button>
+    </div>
+  </div>
+
   <header class="site-header">
     <a class="brand" href="#top" aria-label="Соленый сад">Соленый сад</a>
     <nav class="main-nav" aria-label="Основная навигация">
@@ -45,8 +54,12 @@
       <a href="#delivery">Доставка</a>
       <a href="#contacts">Контакты</a>
     </nav>
+    <button class="music-toggle" id="musicToggle" type="button" aria-pressed="false" aria-label="Включить музыку">
+      <span aria-hidden="true">♪</span>
+    </button>
     <a class="header-action" href="#sets">Собрать набор</a>
   </header>
+  <audio id="balalaikaMusic" src="assets/audio/kalinka-balalayka.mp4" preload="auto" loop></audio>
 
   <main id="top">
     <section class="hero">
@@ -582,6 +595,106 @@
       <a href="https://wa.me/79872528311" target="_blank" rel="noreferrer">WhatsApp</a>
     </div>
   </footer>
+  <script>
+    (() => {
+      const welcomeGate = document.querySelector("#welcomeGate");
+      const welcomeButton = document.querySelector("#welcomeButton");
+      const musicToggle = document.querySelector("#musicToggle");
+      const balalaikaMusic = document.querySelector("#balalaikaMusic");
+      if (!welcomeGate || !welcomeButton || !musicToggle || !balalaikaMusic) return;
+
+      const setToggleState = () => {
+        const isPlaying = !balalaikaMusic.paused;
+        musicToggle.classList.toggle("is-playing", isPlaying);
+        musicToggle.setAttribute("aria-pressed", String(isPlaying));
+        musicToggle.setAttribute("aria-label", isPlaying ? "Выключить музыку" : "Включить музыку");
+      };
+
+      const createMusicBurst = () => {
+        const panel = welcomeButton.closest(".welcome-panel");
+        if (!panel || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+        const pieces = [
+          { color: "#7c2d28", width: 18, height: 14, radius: "54% 42% 58% 44%" },
+          { color: "#d8782f", width: 24, height: 10, radius: "999px 40% 999px 40%" },
+          { color: "#4f653d", width: 22, height: 12, radius: "55% 999px 55% 999px" },
+          { color: "#f4eadc", width: 20, height: 13, radius: "46% 54% 40% 60%" },
+          { color: "#a8895d", width: 10, height: 10, radius: "50%" },
+          { color: "#7c2d28", width: 16, height: 18, radius: "52% 38% 62% 42%" },
+          { color: "#d8782f", width: 20, height: 11, radius: "999px 42% 999px 42%" },
+          { color: "#4f653d", width: 18, height: 13, radius: "48% 999px 48% 999px" },
+          { color: "#f4eadc", width: 22, height: 12, radius: "38% 62% 54% 46%" },
+          { color: "#d7b66f", width: 8, height: 8, radius: "50%" }
+        ];
+
+        pieces.forEach((piece, index) => {
+          const burst = document.createElement("span");
+          burst.className = `music-burst-note is-veggie${piece.width <= 10 ? " is-dot" : ""}`;
+          burst.style.setProperty("--burst-x", `${(index - 4.5) * 8}px`);
+          burst.style.setProperty("--burst-y", `${index % 2 === 0 ? -6 : 8}px`);
+          burst.style.setProperty("--burst-dx", `${(index - 4.5) * 30}px`);
+          burst.style.setProperty("--burst-dy", `${-112 - Math.abs(index - 4.5) * 9}px`);
+          burst.style.setProperty("--burst-rotate", `${(index - 4.5) * 26}deg`);
+          burst.style.setProperty("--burst-color", piece.color);
+          burst.style.setProperty("--piece-width", `${piece.width}px`);
+          burst.style.setProperty("--piece-height", `${piece.height}px`);
+          burst.style.setProperty("--piece-radius", piece.radius);
+          panel.appendChild(burst);
+          window.setTimeout(() => burst.remove(), 950);
+        });
+      };
+
+      const startMusic = async () => {
+        balalaikaMusic.volume = 0.55;
+        await balalaikaMusic.play();
+        setToggleState();
+      };
+
+      const stopMusic = () => {
+        balalaikaMusic.pause();
+        setToggleState();
+      };
+
+      welcomeButton.addEventListener("click", async () => {
+        if (welcomeButton.disabled) return;
+        welcomeButton.disabled = true;
+        welcomeButton.classList.add("is-scattering");
+        welcomeGate.classList.add("is-celebrating");
+        createMusicBurst();
+
+        try {
+          await startMusic();
+        } catch {
+          setToggleState();
+        }
+
+        window.setTimeout(() => {
+          welcomeGate.classList.add("is-hidden");
+          welcomeGate.classList.remove("is-celebrating");
+          welcomeButton.classList.remove("is-scattering");
+          welcomeButton.disabled = false;
+        }, 620);
+      });
+
+      musicToggle.addEventListener("click", async () => {
+        if (!balalaikaMusic.paused) {
+          stopMusic();
+        } else {
+          try {
+            await startMusic();
+          } catch {
+            setToggleState();
+          }
+        }
+      });
+
+      balalaikaMusic.addEventListener("play", setToggleState);
+      balalaikaMusic.addEventListener("pause", setToggleState);
+      balalaikaMusic.addEventListener("ended", setToggleState);
+      setToggleState();
+    })();
+
+  </script>
   <script>
     (() => {
       const steps = [...document.querySelectorAll(".process-step")];
