@@ -16,7 +16,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
   <link rel="stylesheet" href="styles.css?v=20260520-contactline">
-  <link rel="stylesheet" href="craft.css?v=20260527-process">
+  <link rel="stylesheet" href="craft.css?v=20260527-kadushka">
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -362,42 +362,51 @@
         <div class="process-steps" aria-label="Этапы приготовления">
           <button class="process-step is-active" type="button" data-step="0">
             <span>01 / овощи</span>
-            <strong>Выбираем сезонную основу</strong>
-            <p>Капуста, свекла, огурцы, яблоки и ягоды идут в небольшие партии, чтобы вкус оставался живым.</p>
+            <strong>Готовим кадушку и огурцы</strong>
+            <p>Свежие огурцы, укроп, чеснок и листья собираются на столе перед укладкой.</p>
           </button>
           <button class="process-step" type="button" data-step="1">
-            <span>02 / рассол</span>
-            <strong>Собираем соль и специи</strong>
-            <p>Без уксуса и тяжелых маринадов: только рассол, пряности и аккуратная кислотность.</p>
+            <span>02 / укладка</span>
+            <strong>Кладем огурцы слоями</strong>
+            <p>В кадушке появляются плотные зеленые слои, специи и травы для будущего вкуса.</p>
           </button>
           <button class="process-step" type="button" data-step="2">
-            <span>03 / время</span>
-            <strong>Даем ферментации созреть</strong>
-            <p>В прохладе вкус становится глубже, цвет плотнее, а текстура сохраняет приятный хруст.</p>
+            <span>03 / рассол</span>
+            <strong>Заливаем прозрачный рассол</strong>
+            <p>Соль, вода и специи запускают естественную ферментацию без уксуса.</p>
           </button>
           <button class="process-step" type="button" data-step="3">
-            <span>04 / подарок</span>
-            <strong>Упаковываем как гастрономический сет</strong>
-            <p>Стекло, темная ткань, веревка и спокойная этикетка превращают заготовку в красивый подарок.</p>
+            <span>04 / время</span>
+            <strong>Оставляем вкус созревать</strong>
+            <p>Огурцы отдыхают в рассоле, набирают кислинку, аромат и хруст.</p>
+          </button>
+          <button class="process-step" type="button" data-step="4">
+            <span>05 / баночка</span>
+            <strong>Переносим традицию в стекло</strong>
+            <p>Готовый вкус становится маленькой баночкой для стола или подарочного набора.</p>
           </button>
         </div>
 
         <div class="process-stage" aria-live="polite">
           <figure class="process-frame is-active" data-frame="0">
-            <img src="assets/images/product-assorti.jpg" alt="Ассорти из ферментированных овощей в стеклянной банке">
-            <figcaption>Сезонная основа</figcaption>
+            <img src="assets/images/process/kadushka-01-prep.jpg" alt="Деревянная кадушка, свежие огурцы, укроп и чеснок на светлом столе">
+            <figcaption>Кадушка и свежие огурцы</figcaption>
           </figure>
           <figure class="process-frame" data-frame="1">
-            <img src="assets/images/product-pickles.png" alt="Огурцы в прозрачном рассоле с укропом">
-            <figcaption>Рассол и специи</figcaption>
+            <img src="assets/images/process/kadushka-02-layer.jpg" alt="Огурцы уложены слоями в деревянную кадушку со специями и зеленью">
+            <figcaption>Укладка слоями</figcaption>
           </figure>
           <figure class="process-frame" data-frame="2">
-            <img src="assets/images/product-tern.jpg" alt="Баночка ферментированного терна глубокого ягодного цвета">
-            <figcaption>Время и прохлада</figcaption>
+            <img src="assets/images/process/kadushka-03-brine.jpg" alt="Прозрачный рассол льется в деревянную кадушку с огурцами">
+            <figcaption>Заливка рассолом</figcaption>
           </figure>
           <figure class="process-frame" data-frame="3">
-            <img src="assets/images/jars-gift-box.png" alt="Подарочная коробка с маленькими баночками Соленый сад">
-            <figcaption>Готовый набор</figcaption>
+            <img src="assets/images/process/kadushka-04-rest.jpg" alt="Огурцы в рассоле созревают в деревянной кадушке">
+            <figcaption>Созревание вкуса</figcaption>
+          </figure>
+          <figure class="process-frame" data-frame="4">
+            <img src="assets/images/process/kadushka-05-finish.jpg" alt="Готовая баночка соленых огурцов рядом с деревянной кадушкой">
+            <figcaption>Готовая баночка</figcaption>
           </figure>
           <div class="process-light" aria-hidden="true"></div>
         </div>
@@ -596,6 +605,22 @@
       steps.forEach((step, index) => {
         step.addEventListener("click", () => setActive(index));
         step.addEventListener("focus", () => setActive(index));
+      });
+
+      let processTimer = window.setInterval(() => {
+        const active = steps.findIndex((step) => step.classList.contains("is-active"));
+        setActive((active + 1) % steps.length);
+      }, 3200);
+
+      document.querySelector(".process-section")?.addEventListener("mouseenter", () => {
+        window.clearInterval(processTimer);
+      });
+
+      document.querySelector(".process-section")?.addEventListener("mouseleave", () => {
+        processTimer = window.setInterval(() => {
+          const active = steps.findIndex((step) => step.classList.contains("is-active"));
+          setActive((active + 1) % steps.length);
+        }, 3200);
       });
 
       if ("IntersectionObserver" in window) {

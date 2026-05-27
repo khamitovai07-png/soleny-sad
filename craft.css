@@ -160,11 +160,6 @@
   object-fit: cover;
 }
 
-.process-frame[data-frame="3"] img {
-  object-fit: contain;
-  padding: clamp(24px, 4vw, 54px);
-}
-
 .process-frame figcaption {
   position: absolute;
   left: 24px;
