@@ -20,7 +20,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
   <link rel="preload" href="assets/images/jars-luxury-studio.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=20260528-buttons-over-photo">
+  <link rel="stylesheet" href="styles.css?v=20260528-draggable-buttons">
   <link rel="stylesheet" href="craft.css?v=20260528-seo-speed">
   <script type="application/ld+json">
     {
@@ -148,8 +148,8 @@
           Свекла, соленые огурцы, квашеная капуста, ассорти, моченые яблоки, терн и соленые грибы в прозрачном стекле:
           темная ткань на крышке, тонкая веревка и аккуратная наклейка с названием вкуса.
         </p>
-        <div class="hero-design-shortcuts" aria-label="Быстро примерить дизайн">
-          <span>Примерить дизайн:</span>
+        <div class="hero-design-shortcuts" aria-label="Быстро примерить дизайн" data-draggable-design-panel>
+          <span title="Потяните, чтобы переместить блок">Примерить дизайн:</span>
           <button class="is-active" type="button" aria-pressed="true" data-design-jump="original">Основной</button>
           <button type="button" aria-pressed="false" data-design-jump="airtable">Airtable</button>
           <button type="button" aria-pressed="false" data-design-jump="bugatti">Bugatti</button>
@@ -777,6 +777,78 @@
       });
 
       setDesignMode("original");
+    })();
+
+    (() => {
+      const panel = document.querySelector("[data-draggable-design-panel]");
+      const hero = document.querySelector(".hero");
+      if (!panel || !hero) return;
+
+      const storageKey = "soleny-sad-design-panel-position";
+      const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+      const placePanel = (left, top) => {
+        const heroRect = hero.getBoundingClientRect();
+        const panelRect = panel.getBoundingClientRect();
+        const safeLeft = clamp(left, 8, heroRect.width - panelRect.width - 8);
+        const safeTop = clamp(top, 8, heroRect.height - panelRect.height - 8);
+        panel.style.setProperty("--design-panel-left", `${safeLeft}px`);
+        panel.style.setProperty("--design-panel-top", `${safeTop}px`);
+        panel.classList.add("is-moved");
+        return { left: safeLeft, top: safeTop };
+      };
+
+      try {
+        const saved = JSON.parse(window.localStorage.getItem(storageKey));
+        if (saved && Number.isFinite(saved.left) && Number.isFinite(saved.top)) {
+          placePanel(saved.left, saved.top);
+        }
+      } catch {
+        window.localStorage.removeItem(storageKey);
+      }
+
+      panel.addEventListener("pointerdown", (event) => {
+        if (event.target.closest("button")) return;
+
+        const heroRect = hero.getBoundingClientRect();
+        const panelRect = panel.getBoundingClientRect();
+        const startLeft = panelRect.left - heroRect.left;
+        const startTop = panelRect.top - heroRect.top;
+        const startX = event.clientX;
+        const startY = event.clientY;
+
+        panel.classList.add("is-dragging");
+        panel.setPointerCapture(event.pointerId);
+
+        const movePanel = (moveEvent) => {
+          const next = placePanel(
+            startLeft + moveEvent.clientX - startX,
+            startTop + moveEvent.clientY - startY
+          );
+          window.localStorage.setItem(storageKey, JSON.stringify(next));
+        };
+
+        const stopDrag = () => {
+          panel.classList.remove("is-dragging");
+          panel.removeEventListener("pointermove", movePanel);
+          panel.removeEventListener("pointerup", stopDrag);
+          panel.removeEventListener("pointercancel", stopDrag);
+        };
+
+        panel.addEventListener("pointermove", movePanel);
+        panel.addEventListener("pointerup", stopDrag);
+        panel.addEventListener("pointercancel", stopDrag);
+      });
+
+      window.addEventListener("resize", () => {
+        if (!panel.classList.contains("is-moved")) return;
+        const currentLeft = parseFloat(panel.style.getPropertyValue("--design-panel-left"));
+        const currentTop = parseFloat(panel.style.getPropertyValue("--design-panel-top"));
+        if (Number.isFinite(currentLeft) && Number.isFinite(currentTop)) {
+          const next = placePanel(currentLeft, currentTop);
+          window.localStorage.setItem(storageKey, JSON.stringify(next));
+        }
+      });
     })();
 
     (() => {
