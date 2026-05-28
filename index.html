@@ -20,7 +20,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
   <link rel="preload" href="assets/images/jars-luxury-studio.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=20260528-no-extra-hand">
+  <link rel="stylesheet" href="styles.css?v=20260528-solid-panel-drag">
   <link rel="stylesheet" href="craft.css?v=20260528-seo-speed">
   <script type="application/ld+json">
     {
@@ -168,7 +168,7 @@
         </div>
       </div>
       <figure class="hero-media" aria-label="Маленькие стеклянные баночки с ферментированными овощами">
-        <img src="assets/images/jars-luxury-studio.webp" width="1536" height="1024" decoding="async" fetchpriority="high" alt="Премиальная предметная съемка маленьких стеклянных баночек с ферментированными овощами, темной тканью и веревкой">
+        <img src="assets/images/jars-luxury-studio.webp" width="1536" height="1024" decoding="async" fetchpriority="high" draggable="false" alt="Премиальная предметная съемка маленьких стеклянных баночек с ферментированными овощами, темной тканью и веревкой">
         <figcaption>Небольшие партии в стекле: овощи, соль, специи и время.</figcaption>
       </figure>
     </section>
@@ -838,12 +838,20 @@
         suppressClick = false;
       }, true);
 
+      panel.addEventListener("dragstart", (event) => {
+        event.preventDefault();
+      });
+
       const stopDrag = () => {
         if (!dragState) return;
         const shouldSuppressClick = dragState.shouldSuppressClick;
+        const pointerId = dragState.pointerId;
         dragState = null;
         panel.classList.remove("is-dragging");
         document.body.classList.remove("is-design-panel-dragging");
+        if (panel.hasPointerCapture?.(pointerId)) {
+          panel.releasePointerCapture(pointerId);
+        }
         window.removeEventListener("pointermove", movePanel);
         window.removeEventListener("pointerup", stopDrag);
         window.removeEventListener("pointercancel", stopDrag);
@@ -853,6 +861,7 @@
 
       const movePanel = (event) => {
         if (!dragState) return;
+        if (event.pointerId !== dragState.pointerId) return;
         if (event.pointerType === "mouse" && event.buttons !== 1) {
           stopDrag();
           return;
@@ -876,10 +885,13 @@
       panel.addEventListener("pointerdown", (event) => {
         if (event.button !== 0 && event.pointerType === "mouse") return;
         if (dragState) stopDrag();
+        event.preventDefault();
+        event.stopPropagation();
         const heroRect = hero.getBoundingClientRect();
         const panelRect = panel.getBoundingClientRect();
 
         dragState = {
+          pointerId: event.pointerId,
           didDrag: false,
           shouldSuppressClick: false,
           grabOffsetX: event.clientX - panelRect.left,
@@ -887,6 +899,9 @@
           startX: event.clientX,
           startY: event.clientY
         };
+        panel.setPointerCapture?.(event.pointerId);
+        panel.classList.add("is-dragging");
+        document.body.classList.add("is-design-panel-dragging");
         window.addEventListener("pointermove", movePanel, { passive: false });
         window.addEventListener("pointerup", stopDrag);
         window.addEventListener("pointercancel", stopDrag);

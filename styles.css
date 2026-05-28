@@ -224,7 +224,6 @@ h3 {
 
 .hero-design-shortcuts.is-dragging {
   cursor: grabbing;
-  pointer-events: none;
   transition: none;
 }
 
@@ -849,6 +848,8 @@ body[data-design-mode="starbucks"] .hero-design-shortcuts button.is-active {
   width: 122%;
   max-width: none;
   transform: translate(2%, 4px);
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 .hero-media figcaption {
