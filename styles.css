@@ -191,15 +191,17 @@ h3 {
 }
 
 .hero-design-shortcuts {
-  position: relative;
+  position: absolute;
   z-index: 3;
-  display: flex;
-  flex-wrap: wrap;
-  width: fit-content;
-  max-width: 100%;
+  top: clamp(18px, 3vw, 44px);
+  right: clamp(16px, 2.2vw, 34px);
+  bottom: auto;
+  display: grid;
+  width: min(320px, calc(100vw - 32px));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: center;
   gap: 8px;
-  margin-top: 24px;
+  margin-top: 0;
   border: 1px solid rgba(85, 63, 38, 0.22);
   border-radius: 12px;
   padding: 8px;
@@ -208,9 +210,9 @@ h3 {
   box-shadow: 0 18px 46px rgba(45, 34, 22, 0.16);
   backdrop-filter: blur(18px);
   font-size: 12px;
-  cursor: default;
+  cursor: grab;
   user-select: none;
-  touch-action: auto;
+  touch-action: none;
 }
 
 .hero-design-shortcuts.is-moved {
@@ -222,12 +224,46 @@ h3 {
 
 .hero-design-shortcuts.is-dragging {
   cursor: grabbing;
+  pointer-events: none;
   transition: none;
+}
+
+body.is-design-panel-dragging,
+body.is-design-panel-dragging * {
+  cursor: none !important;
+  user-select: none !important;
+}
+
+.design-grab-cursor {
+  position: fixed;
+  z-index: 9999;
+  left: var(--grab-x, -100px);
+  top: var(--grab-y, -100px);
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 1px solid rgba(39, 34, 27, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 10px 26px rgba(39, 34, 27, 0.2);
+  color: var(--charcoal);
+  font-size: 21px;
+  line-height: 1;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: opacity 90ms ease;
+}
+
+.design-grab-cursor.is-visible {
+  opacity: 1;
 }
 
 .design-drag-handle {
   display: flex;
   min-height: 36px;
+  grid-column: 1 / -1;
   align-items: center;
   justify-content: center;
   margin-right: 0;
@@ -250,6 +286,7 @@ h3 {
   color: var(--charcoal);
   background: rgba(255, 249, 239, 0.76);
   font: inherit;
+  font-size: 11px;
   font-weight: 900;
   cursor: pointer;
   transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease, color 180ms ease;
