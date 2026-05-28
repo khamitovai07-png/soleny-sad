@@ -20,7 +20,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
   <link rel="preload" href="assets/images/jars-luxury-studio.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=20260528-exact-grab-drag">
+  <link rel="stylesheet" href="styles.css?v=20260528-custom-grab-cursor">
   <link rel="stylesheet" href="craft.css?v=20260528-seo-speed">
   <script type="application/ld+json">
     {
@@ -785,7 +785,17 @@
       if (!panel || !hero) return;
 
       const storageKey = "soleny-sad-design-panel-position";
+      const grabCursor = document.createElement("div");
+      grabCursor.className = "design-grab-cursor";
+      grabCursor.setAttribute("aria-hidden", "true");
+      grabCursor.textContent = "✋";
+      document.body.appendChild(grabCursor);
       const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+      const moveGrabCursor = (event) => {
+        grabCursor.style.setProperty("--grab-x", `${event.clientX}px`);
+        grabCursor.style.setProperty("--grab-y", `${event.clientY}px`);
+      };
 
       const placePanel = (left, top) => {
         const heroRect = hero.getBoundingClientRect();
@@ -823,6 +833,7 @@
         dragState = null;
         panel.classList.remove("is-dragging");
         document.body.classList.remove("is-design-panel-dragging");
+        grabCursor.classList.remove("is-visible");
         window.removeEventListener("pointermove", movePanel);
         window.removeEventListener("pointerup", stopDrag);
         window.removeEventListener("pointercancel", stopDrag);
@@ -838,6 +849,7 @@
         }
 
         event.preventDefault();
+        moveGrabCursor(event);
         const distance = Math.hypot(event.clientX - dragState.startX, event.clientY - dragState.startY);
         dragState.didDrag = true;
         dragState.shouldSuppressClick = distance > 2;
@@ -866,6 +878,8 @@
           startX: event.clientX,
           startY: event.clientY
         };
+        moveGrabCursor(event);
+        grabCursor.classList.add("is-visible");
 
         window.addEventListener("pointermove", movePanel, { passive: false });
         window.addEventListener("pointerup", stopDrag);
