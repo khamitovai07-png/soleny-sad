@@ -193,10 +193,11 @@ h3 {
 .hero-design-shortcuts {
   position: absolute;
   z-index: 3;
-  top: clamp(16px, 2vw, 26px);
-  right: clamp(8px, 1.6vw, 24px);
+  top: auto;
+  right: clamp(16px, 2.2vw, 34px);
+  bottom: clamp(96px, 8vw, 132px);
   display: grid;
-  width: min(218px, calc(100vw - 32px));
+  width: min(210px, calc(100vw - 32px));
   align-items: center;
   gap: 7px;
   margin-top: 0;
