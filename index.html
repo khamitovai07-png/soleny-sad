@@ -20,7 +20,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
   <link rel="preload" href="assets/images/jars-luxury-studio.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=20260528-seo-speed">
+  <link rel="stylesheet" href="styles.css?v=20260528-design-switcher">
   <link rel="stylesheet" href="craft.css?v=20260528-seo-speed">
   <script type="application/ld+json">
     {
@@ -157,6 +157,12 @@
         <div class="hero-actions">
           <a class="button button-primary" href="#jars">Смотреть вкусы</a>
           <a class="button button-secondary" href="#sets">Выбрать набор</a>
+        </div>
+        <div class="hero-design-shortcuts" aria-label="Быстро примерить дизайн">
+          <span>Примерить дизайн:</span>
+          <button type="button" data-design-jump="airtable">Airtable</button>
+          <button type="button" data-design-jump="bugatti">Bugatti</button>
+          <button type="button" data-design-jump="clickhouse">ClickHouse</button>
         </div>
       </div>
       <figure class="hero-media" aria-label="Маленькие стеклянные баночки с ферментированными овощами">
@@ -886,6 +892,13 @@ ORDER BY dinner_ready DESC;</code></pre>
 
       tabs.forEach((tab) => {
         tab.addEventListener("click", () => setDesign(tab.dataset.designTarget));
+      });
+
+      document.querySelectorAll("[data-design-jump]").forEach((button) => {
+        button.addEventListener("click", () => {
+          setDesign(button.dataset.designJump);
+          document.querySelector("#designs")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
       });
     })();
 

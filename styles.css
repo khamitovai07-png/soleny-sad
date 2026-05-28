@@ -187,6 +187,38 @@ h3 {
   margin-top: 30px;
 }
 
+.hero-design-shortcuts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.hero-design-shortcuts span {
+  margin-right: 2px;
+  font-weight: 800;
+}
+
+.hero-design-shortcuts button {
+  min-height: 34px;
+  border: 1px solid rgba(85, 63, 38, 0.2);
+  border-radius: 999px;
+  padding: 0 13px;
+  color: var(--charcoal);
+  background: rgba(255, 249, 239, 0.66);
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.hero-design-shortcuts button:focus-visible {
+  outline: 2px solid var(--beet);
+  outline-offset: 2px;
+}
+
 .button {
   display: inline-flex;
   align-items: center;
