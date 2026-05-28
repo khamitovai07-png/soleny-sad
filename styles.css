@@ -223,7 +223,14 @@ h3 {
 
 .hero-design-shortcuts.is-dragging {
   cursor: grabbing;
+  pointer-events: none;
   transition: none;
+}
+
+body.is-design-panel-dragging,
+body.is-design-panel-dragging * {
+  cursor: grabbing !important;
+  user-select: none !important;
 }
 
 .design-drag-handle {

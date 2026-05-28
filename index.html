@@ -20,7 +20,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
   <link rel="preload" href="assets/images/jars-luxury-studio.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=20260528-window-drag">
+  <link rel="stylesheet" href="styles.css?v=20260528-grabbing-cursor">
   <link rel="stylesheet" href="craft.css?v=20260528-seo-speed">
   <script type="application/ld+json">
     {
@@ -822,8 +822,10 @@
         const shouldSuppressClick = dragState.didDrag;
         dragState = null;
         panel.classList.remove("is-dragging");
+        document.body.classList.remove("is-design-panel-dragging");
         window.removeEventListener("pointermove", movePanel);
         window.removeEventListener("pointerup", stopDrag);
+        window.removeEventListener("pointercancel", stopDrag);
         window.removeEventListener("blur", stopDrag);
         suppressClick = shouldSuppressClick;
       };
@@ -841,6 +843,7 @@
         event.preventDefault();
         dragState.didDrag = true;
         panel.classList.add("is-dragging");
+        document.body.classList.add("is-design-panel-dragging");
 
         const next = placePanel(
           dragState.startLeft + event.clientX - dragState.startX,
@@ -865,6 +868,7 @@
 
         window.addEventListener("pointermove", movePanel, { passive: false });
         window.addEventListener("pointerup", stopDrag);
+        window.addEventListener("pointercancel", stopDrag);
         window.addEventListener("blur", stopDrag);
       });
 
