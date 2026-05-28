@@ -20,7 +20,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
   <link rel="preload" href="assets/images/jars-luxury-studio.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=20260528-panel-drag-stable">
+  <link rel="stylesheet" href="styles.css?v=20260528-window-drag">
   <link rel="stylesheet" href="craft.css?v=20260528-seo-speed">
   <script type="application/ld+json">
     {
@@ -807,8 +807,8 @@
         window.localStorage.removeItem(storageKey);
       }
 
+      let dragState = null;
       let suppressClick = false;
-      let activePointerId = null;
 
       panel.addEventListener("click", (event) => {
         if (!suppressClick) return;
@@ -817,57 +817,53 @@
         suppressClick = false;
       }, true);
 
+      const stopDrag = () => {
+        if (!dragState) return;
+        const shouldSuppressClick = dragState.didDrag;
+        dragState = null;
+        panel.classList.remove("is-dragging");
+        window.removeEventListener("pointermove", movePanel);
+        window.removeEventListener("pointerup", stopDrag);
+        window.removeEventListener("blur", stopDrag);
+        suppressClick = shouldSuppressClick;
+      };
+
+      const movePanel = (event) => {
+        if (!dragState) return;
+        if (event.pointerType === "mouse" && event.buttons !== 1) {
+          stopDrag();
+          return;
+        }
+
+        const distance = Math.hypot(event.clientX - dragState.startX, event.clientY - dragState.startY);
+        if (!dragState.didDrag && distance < 6) return;
+
+        event.preventDefault();
+        dragState.didDrag = true;
+        panel.classList.add("is-dragging");
+
+        const next = placePanel(
+          dragState.startLeft + event.clientX - dragState.startX,
+          dragState.startTop + event.clientY - dragState.startY
+        );
+        window.localStorage.setItem(storageKey, JSON.stringify(next));
+      };
+
       panel.addEventListener("pointerdown", (event) => {
         if (event.button !== 0 && event.pointerType === "mouse") return;
-        if (activePointerId !== null) return;
-        activePointerId = event.pointerId;
-
+        if (dragState) stopDrag();
         const heroRect = hero.getBoundingClientRect();
         const panelRect = panel.getBoundingClientRect();
-        const startLeft = panelRect.left - heroRect.left;
-        const startTop = panelRect.top - heroRect.top;
-        const startX = event.clientX;
-        const startY = event.clientY;
-        let didDrag = false;
 
-        panel.setPointerCapture(event.pointerId);
-
-        const movePanel = (moveEvent) => {
-          if (moveEvent.pointerId !== activePointerId) return;
-          if (moveEvent.pointerType === "mouse" && moveEvent.buttons !== 1) {
-            stopDrag();
-            return;
-          }
-
-          const distance = Math.hypot(moveEvent.clientX - startX, moveEvent.clientY - startY);
-          if (!didDrag && distance < 4) return;
-          didDrag = true;
-          suppressClick = true;
-          panel.classList.add("is-dragging");
-          const next = placePanel(
-            startLeft + moveEvent.clientX - startX,
-            startTop + moveEvent.clientY - startY
-          );
-          window.localStorage.setItem(storageKey, JSON.stringify(next));
+        dragState = {
+          didDrag: false,
+          startLeft: panelRect.left - heroRect.left,
+          startTop: panelRect.top - heroRect.top,
+          startX: event.clientX,
+          startY: event.clientY
         };
 
-        const stopDrag = () => {
-          panel.classList.remove("is-dragging");
-          if (panel.hasPointerCapture(event.pointerId)) {
-            panel.releasePointerCapture(event.pointerId);
-          }
-          panel.removeEventListener("pointermove", movePanel);
-          panel.removeEventListener("pointercancel", stopDrag);
-          panel.removeEventListener("lostpointercapture", stopDrag);
-          window.removeEventListener("pointerup", stopDrag);
-          window.removeEventListener("blur", stopDrag);
-          activePointerId = null;
-          if (!didDrag) suppressClick = false;
-        };
-
-        panel.addEventListener("pointermove", movePanel);
-        panel.addEventListener("pointercancel", stopDrag);
-        panel.addEventListener("lostpointercapture", stopDrag);
+        window.addEventListener("pointermove", movePanel, { passive: false });
         window.addEventListener("pointerup", stopDrag);
         window.addEventListener("blur", stopDrag);
       });
