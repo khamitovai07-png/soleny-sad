@@ -128,7 +128,6 @@
     <nav class="main-nav" aria-label="Основная навигация">
       <a href="#jars">Баночки</a>
       <a href="#benefits">Польза</a>
-      <a href="#designs">Дизайн</a>
       <a href="#sets">Наборы</a>
       <a href="#gifts">Подарки</a>
       <a href="#serving">Подача</a>
@@ -183,120 +182,6 @@
       <div>
         <strong>Состав</strong>
         <span>овощи, соль, специи, время</span>
-      </div>
-    </section>
-
-    <section class="design-lab" id="designs" aria-labelledby="designs-title">
-      <div class="design-lab-heading">
-        <p class="eyebrow">примерка визуальных систем</p>
-        <h2 id="designs-title">Три версии «Соленого сада» на одной странице</h2>
-        <p>
-          Переключите направление и посмотрите, как один и тот же продукт звучит
-          в редакционной, люксовой и технологичной подаче.
-        </p>
-      </div>
-
-      <div class="design-switcher" role="tablist" aria-label="Варианты дизайна">
-        <button class="design-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="design-airtable" data-design-target="airtable">
-          Airtable
-        </button>
-        <button class="design-tab" type="button" role="tab" aria-selected="false" aria-controls="design-bugatti" data-design-target="bugatti">
-          Bugatti
-        </button>
-        <button class="design-tab" type="button" role="tab" aria-selected="false" aria-controls="design-clickhouse" data-design-target="clickhouse">
-          ClickHouse
-        </button>
-      </div>
-
-      <div class="design-stage">
-        <article class="design-panel design-panel-airtable is-active" id="design-airtable" role="tabpanel" data-design-panel="airtable">
-          <div class="airtable-hero">
-            <div>
-              <span class="design-kicker">Editorial system</span>
-              <h3>Соленые баночки в спокойной витрине</h3>
-              <p>
-                Белый холст, строгая типографика и редкие цветовые акценты:
-                продукт остается главным, а коралловая карточка добавляет нужное напряжение.
-              </p>
-              <div class="design-actions">
-                <a class="airtable-primary" href="#jars">Смотреть вкусы</a>
-                <a class="airtable-secondary" href="#sets">Собрать набор</a>
-              </div>
-            </div>
-            <figure>
-              <img src="assets/images/jars-gift-box.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="Подарочный набор ферментированных овощей в стиле editorial витрины">
-            </figure>
-          </div>
-          <div class="airtable-card-row" aria-label="Примеры карточек в стиле Airtable">
-            <div class="airtable-card coral">
-              <strong>Production taste in prototype speed</strong>
-              <span>Свекла, огурцы и капуста готовы к столу без лишнего визуального шума.</span>
-            </div>
-            <div class="airtable-card cream">
-              <strong>Набор на ужин</strong>
-              <span>3 баночки, карточка подачи и аккуратная упаковка.</span>
-            </div>
-            <div class="airtable-card mint">
-              <strong>Ферментация</strong>
-              <span>Овощи, соль, специи и время в понятной системе вкусов.</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="design-panel design-panel-bugatti" id="design-bugatti" role="tabpanel" data-design-panel="bugatti" hidden>
-          <figure class="bugatti-photo">
-            <img src="assets/images/jars-luxury-studio.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="Темная премиальная съемка баночек Соленого сада">
-          </figure>
-          <div class="bugatti-copy">
-            <span>FERMENTED EDITION</span>
-            <h3>Соленый сад</h3>
-            <p>
-              Стекло, рассол, прохлада и время. Никаких декоративных акцентов:
-              только продукт, темная сцена и точная подача.
-            </p>
-            <a class="bugatti-button" href="#contacts">Запросить набор</a>
-          </div>
-          <div class="bugatti-specs" aria-label="Ключевые характеристики в стиле Bugatti">
-            <div><strong>250 мл</strong><span>glass jar</span></div>
-            <div><strong>0%</strong><span>vinegar</span></div>
-            <div><strong>7</strong><span>seasonal tastes</span></div>
-          </div>
-        </article>
-
-        <article class="design-panel design-panel-clickhouse" id="design-clickhouse" role="tabpanel" data-design-panel="clickhouse" hidden>
-          <div class="clickhouse-copy">
-            <span class="clickhouse-badge">GET STARTED</span>
-            <h3>База вкусов для быстрого ужина</h3>
-            <p>
-              Черная поверхность, желтый сигнал действия и плотные карточки:
-              «Соленый сад» выглядит как продуктовая система с ясными данными.
-            </p>
-            <div class="clickhouse-actions">
-              <a class="clickhouse-primary" href="#sets">Собрать сет</a>
-              <a class="clickhouse-secondary" href="#jars">Открыть каталог</a>
-            </div>
-            <div class="clickhouse-stats" aria-label="Статистика продуктовой линейки">
-              <div><strong>7+</strong><span>вкусов</span></div>
-              <div><strong>250</strong><span>мл максимум</span></div>
-              <div><strong>0</strong><span>уксуса</span></div>
-            </div>
-          </div>
-          <div class="clickhouse-code" aria-label="Кодовое окно с примером заказа">
-            <div class="code-window-bar"><span></span><span></span><span></span></div>
-            <pre><code>SELECT jar, volume_ml, pairing
-FROM soleny_sad
-WHERE vinegar = false
-ORDER BY dinner_ready DESC;</code></pre>
-            <div class="query-result">
-              <span>Свекла с хреном</span>
-              <span>220 мл</span>
-              <span>картофель, хлеб</span>
-            </div>
-            <figure>
-              <img src="assets/images/product-beet.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="Баночка ферментированной свеклы с хреном">
-            </figure>
-          </div>
-        </article>
       </div>
     </section>
 
@@ -871,37 +756,6 @@ ORDER BY dinner_ready DESC;</code></pre>
     </div>
   </footer>
   <script>
-    (() => {
-      const tabs = [...document.querySelectorAll("[data-design-target]")];
-      const panels = [...document.querySelectorAll("[data-design-panel]")];
-      if (!tabs.length || !panels.length) return;
-
-      const setDesign = (target) => {
-        tabs.forEach((tab) => {
-          const isActive = tab.dataset.designTarget === target;
-          tab.classList.toggle("is-active", isActive);
-          tab.setAttribute("aria-selected", String(isActive));
-        });
-
-        panels.forEach((panel) => {
-          const isActive = panel.dataset.designPanel === target;
-          panel.classList.toggle("is-active", isActive);
-          panel.hidden = !isActive;
-        });
-      };
-
-      tabs.forEach((tab) => {
-        tab.addEventListener("click", () => setDesign(tab.dataset.designTarget));
-      });
-
-      document.querySelectorAll("[data-design-jump]").forEach((button) => {
-        button.addEventListener("click", () => {
-          setDesign(button.dataset.designJump);
-          document.querySelector("#designs")?.scrollIntoView({ behavior: "smooth", block: "start" });
-        });
-      });
-    })();
-
     (() => {
       const steps = [...document.querySelectorAll(".process-step")];
       const frames = [...document.querySelectorAll(".process-frame")];
