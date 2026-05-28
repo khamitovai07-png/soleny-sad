@@ -20,7 +20,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
   <link rel="preload" href="assets/images/jars-luxury-studio.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=20260528-grab-point-lock">
+  <link rel="stylesheet" href="styles.css?v=20260528-exact-grab-drag">
   <link rel="stylesheet" href="craft.css?v=20260528-seo-speed">
   <script type="application/ld+json">
     {
@@ -819,7 +819,7 @@
 
       const stopDrag = () => {
         if (!dragState) return;
-        const shouldSuppressClick = dragState.didDrag;
+        const shouldSuppressClick = dragState.shouldSuppressClick;
         dragState = null;
         panel.classList.remove("is-dragging");
         document.body.classList.remove("is-design-panel-dragging");
@@ -837,11 +837,10 @@
           return;
         }
 
-        const distance = Math.hypot(event.clientX - dragState.startX, event.clientY - dragState.startY);
-        if (!dragState.didDrag && distance < 6) return;
-
         event.preventDefault();
+        const distance = Math.hypot(event.clientX - dragState.startX, event.clientY - dragState.startY);
         dragState.didDrag = true;
+        dragState.shouldSuppressClick = distance > 2;
         panel.classList.add("is-dragging");
         document.body.classList.add("is-design-panel-dragging");
 
@@ -861,6 +860,7 @@
 
         dragState = {
           didDrag: false,
+          shouldSuppressClick: false,
           grabOffsetX: event.clientX - panelRect.left,
           grabOffsetY: event.clientY - panelRect.top,
           startX: event.clientX,

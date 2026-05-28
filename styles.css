@@ -102,7 +102,6 @@ a {
   padding: clamp(48px, 6vw, 86px) clamp(20px, 5vw, 68px) 58px;
   background:
     linear-gradient(90deg, rgba(255, 249, 239, 0.72) 0 44%, rgba(66, 52, 38, 0.08) 44% 100%),
-    repeating-linear-gradient(90deg, rgba(84, 65, 42, 0.04) 0 1px, transparent 1px 92px),
     linear-gradient(180deg, #f7efe3, #e5d3bd);
 }
 
@@ -429,9 +428,7 @@ body[data-design-mode="clickhouse"] .header-action {
 
 body[data-design-mode="clickhouse"] .hero {
   color: #ffffff;
-  background:
-    repeating-linear-gradient(90deg, rgba(250, 255, 105, 0.08) 0 1px, transparent 1px 96px),
-    #0a0a0a;
+  background: #0a0a0a;
 }
 
 body[data-design-mode="clickhouse"] h1,
@@ -528,18 +525,6 @@ body[data-design-mode="garden-lab"] .hero {
     radial-gradient(circle at 84% 22%, rgba(192, 44, 86, 0.4), transparent 28%),
     radial-gradient(circle at 14% 76%, rgba(176, 141, 70, 0.36), transparent 32%),
     linear-gradient(135deg, #0f1d11 0%, #182813 48%, #3b1425 100%);
-}
-
-body[data-design-mode="garden-lab"] .hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    linear-gradient(90deg, rgba(255, 248, 220, 0.08) 1px, transparent 1px),
-    linear-gradient(0deg, rgba(255, 248, 220, 0.05) 1px, transparent 1px);
-  background-size: 84px 84px;
-  mask-image: linear-gradient(90deg, #000, transparent 72%);
 }
 
 body[data-design-mode="garden-lab"] .eyebrow {
@@ -835,9 +820,7 @@ body[data-design-mode="starbucks"] .hero-design-shortcuts button.is-active {
   display: flex;
   align-items: center;
   justify-content: center;
-  background:
-    linear-gradient(180deg, rgba(255, 249, 239, 0.84), rgba(226, 211, 190, 0.92)),
-    repeating-linear-gradient(0deg, rgba(50, 39, 27, 0.04) 0 1px, transparent 1px 78px);
+  background: linear-gradient(180deg, rgba(255, 249, 239, 0.84), rgba(226, 211, 190, 0.92));
   box-shadow: var(--deep-shadow);
 }
 
