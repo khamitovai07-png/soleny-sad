@@ -20,7 +20,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
   <link rel="preload" href="assets/images/jars-luxury-studio.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=20260528-panel-reset">
+  <link rel="stylesheet" href="styles.css?v=20260528-panel-reset-v3">
   <link rel="stylesheet" href="craft.css?v=20260528-seo-speed">
   <script type="application/ld+json">
     {
@@ -803,8 +803,9 @@
       const hero = document.querySelector(".hero");
       if (!panel || !hero) return;
 
-      const storageKey = "soleny-sad-design-panel-position-v2";
+      const storageKey = "soleny-sad-design-panel-position-v3";
       window.localStorage.removeItem("soleny-sad-design-panel-position");
+      window.localStorage.removeItem("soleny-sad-design-panel-position-v2");
       const grabCursor = document.createElement("div");
       grabCursor.className = "design-grab-cursor";
       grabCursor.setAttribute("aria-hidden", "true");
