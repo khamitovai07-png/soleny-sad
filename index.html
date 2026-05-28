@@ -4,7 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Соленый сад - ферментированные овощи, соленые огурцы, квашеная капуста, моченые яблоки и подарочные наборы в маленьких стеклянных баночках. Закажите через email, Telegram или WhatsApp.">
+  <meta name="robots" content="index, follow">
+  <meta name="application-name" content="Соленый сад">
   <meta property="og:locale" content="ru_RU">
+  <meta property="og:site_name" content="Соленый сад">
   <meta property="og:title" content="Соленый сад - ферментированные овощи и подарочные наборы">
   <meta property="og:description" content="Соленые огурцы, квашеная капуста, свекла с хреном, моченые яблоки и другие ферментированные закуски к русскому столу.">
   <meta property="og:type" content="website">
@@ -14,13 +17,14 @@
   <meta name="twitter:title" content="Соленый сад - ферментированные овощи">
   <meta name="twitter:description" content="Маленькие баночки солений, ферментированных овощей и подарочных наборов.">
   <meta name="twitter:image" content="https://khamitovai07-png.github.io/soleny-sad/assets/images/jars-luxury-studio.webp">
-  <meta name="theme-color" content="#27221b">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f0e4d3">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#27221b">
   <title>Соленый сад - ферментированные овощи, соленья и подарочные наборы</title>
   <link rel="canonical" href="https://khamitovai07-png.github.io/soleny-sad/">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
   <link rel="preload" href="assets/images/jars-luxury-studio.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=20260528-default-cursor-panel">
+  <link rel="stylesheet" href="styles.css?v=20260528-polish-motion-mobile-seo">
   <link rel="stylesheet" href="craft.css?v=20260528-seo-speed">
   <script type="application/ld+json">
     {
@@ -789,10 +793,20 @@
         });
         rememberMode(nextMode);
       };
-      window.setSolenySadDesignMode = setDesignMode;
+
+      const switchDesignMode = (mode) => {
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (!reduceMotion && document.startViewTransition) {
+          document.startViewTransition(() => setDesignMode(mode));
+          return;
+        }
+        setDesignMode(mode);
+      };
+
+      window.setSolenySadDesignMode = switchDesignMode;
 
       buttons.forEach((button) => {
-        button.addEventListener("click", () => setDesignMode(button.dataset.designJump));
+        button.addEventListener("click", () => switchDesignMode(button.dataset.designJump));
       });
 
       const fromQuery = new URLSearchParams(window.location.search).get("design");
@@ -858,10 +872,12 @@
         window.removeEventListener("pointerup", stopDrag);
         window.removeEventListener("pointercancel", stopDrag);
         window.removeEventListener("blur", stopDrag);
-        suppressClick = shouldSuppressClick;
         if (!shouldSuppressClick && clickedButton) {
+          suppressClick = true;
           window.setSolenySadDesignMode?.(clickedButton.dataset.designJump);
+          return;
         }
+        suppressClick = shouldSuppressClick;
       };
 
       const movePanel = (event) => {
