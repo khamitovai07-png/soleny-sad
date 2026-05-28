@@ -20,7 +20,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
   <link rel="preload" href="assets/images/jars-luxury-studio.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=20260528-lowered-hand-cursor">
+  <link rel="stylesheet" href="styles.css?v=20260528-drag-and-click">
   <link rel="stylesheet" href="craft.css?v=20260528-seo-speed">
   <script type="application/ld+json">
     {
@@ -789,6 +789,7 @@
         });
         rememberMode(nextMode);
       };
+      window.setSolenySadDesignMode = setDesignMode;
 
       buttons.forEach((button) => {
         button.addEventListener("click", () => setDesignMode(button.dataset.designJump));
@@ -846,6 +847,7 @@
         if (!dragState) return;
         const shouldSuppressClick = dragState.shouldSuppressClick;
         const pointerId = dragState.pointerId;
+        const clickedButton = dragState.clickedButton;
         dragState = null;
         panel.classList.remove("is-dragging");
         document.body.classList.remove("is-design-panel-dragging");
@@ -857,6 +859,9 @@
         window.removeEventListener("pointercancel", stopDrag);
         window.removeEventListener("blur", stopDrag);
         suppressClick = shouldSuppressClick;
+        if (!shouldSuppressClick && clickedButton) {
+          window.setSolenySadDesignMode?.(clickedButton.dataset.designJump);
+        }
       };
 
       const movePanel = (event) => {
@@ -894,6 +899,7 @@
           pointerId: event.pointerId,
           didDrag: false,
           shouldSuppressClick: false,
+          clickedButton: event.target.closest("[data-design-jump]"),
           grabOffsetX: event.clientX - panelRect.left,
           grabOffsetY: event.clientY - panelRect.top,
           startX: event.clientX,
