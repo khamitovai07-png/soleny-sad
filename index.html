@@ -891,7 +891,7 @@
         window.addEventListener("pointerup", stopDrag);
         window.addEventListener("pointercancel", stopDrag);
         window.addEventListener("blur", stopDrag);
-      });
+      }, true);
 
       window.addEventListener("resize", () => {
         if (!panel.classList.contains("is-moved")) return;
