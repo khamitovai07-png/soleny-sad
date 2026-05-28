@@ -588,6 +588,177 @@ body[data-design-mode="garden-lab"] .hero-design-shortcuts button.is-active {
   background: #ffcf5a;
 }
 
+body[data-design-mode="starbucks"] {
+  color: rgba(0, 0, 0, 0.87);
+  background: #f2f0eb;
+  font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+body[data-design-mode="starbucks"] .site-header {
+  color: rgba(0, 0, 0, 0.87);
+  border-bottom-color: rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.1),
+    0 2px 2px rgba(0, 0, 0, 0.06),
+    0 0 2px rgba(0, 0, 0, 0.07);
+}
+
+body[data-design-mode="starbucks"] .brand {
+  color: #006241;
+  font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 800;
+}
+
+body[data-design-mode="starbucks"] .main-nav {
+  color: rgba(0, 0, 0, 0.72);
+  font-weight: 700;
+}
+
+body[data-design-mode="starbucks"] .header-action {
+  color: #ffffff;
+  border-color: #000000;
+  border-radius: 50px;
+  background: #000000;
+}
+
+body[data-design-mode="starbucks"] .hero {
+  color: rgba(0, 0, 0, 0.87);
+  background:
+    linear-gradient(90deg, #f2f0eb 0 56%, #1e3932 56% 100%);
+}
+
+body[data-design-mode="starbucks"] .eyebrow {
+  color: #006241;
+  letter-spacing: 0.1em;
+}
+
+body[data-design-mode="starbucks"] h1 {
+  color: #006241;
+  font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 800;
+  line-height: 1;
+}
+
+body[data-design-mode="starbucks"] .hero-subtitle {
+  color: rgba(0, 0, 0, 0.87);
+  font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  line-height: 1.12;
+}
+
+body[data-design-mode="starbucks"] .hero-lead {
+  color: rgba(0, 0, 0, 0.58);
+  line-height: 1.75;
+}
+
+body[data-design-mode="starbucks"] .hero-notes span {
+  color: #006241;
+  border-color: rgba(0, 98, 65, 0.22);
+  border-radius: 50px;
+  background: #ffffff;
+  box-shadow:
+    0 0 0.5px rgba(0, 0, 0, 0.14),
+    0 1px 1px rgba(0, 0, 0, 0.24);
+}
+
+body[data-design-mode="starbucks"] .button {
+  border-radius: 50px;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+body[data-design-mode="starbucks"] .button:active,
+body[data-design-mode="starbucks"] .hero-design-shortcuts button:active {
+  transform: scale(0.95);
+}
+
+body[data-design-mode="starbucks"] .button-primary {
+  color: #ffffff;
+  border-color: #00754a;
+  background: #00754a;
+  box-shadow:
+    0 0 0.5px rgba(0, 0, 0, 0.14),
+    0 1px 1px rgba(0, 0, 0, 0.24);
+}
+
+body[data-design-mode="starbucks"] .button-secondary {
+  color: #00754a;
+  border-color: #00754a;
+  background: transparent;
+}
+
+body[data-design-mode="starbucks"] .hero-media {
+  border: 0;
+  border-radius: 12px;
+  background: #edebe9;
+  box-shadow:
+    0 0 0.5px rgba(0, 0, 0, 0.14),
+    0 1px 1px rgba(0, 0, 0, 0.24);
+}
+
+body[data-design-mode="starbucks"] .hero-media::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  right: 22px;
+  bottom: 22px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #00754a;
+  box-shadow:
+    0 0 6px rgba(0, 0, 0, 0.24),
+    0 8px 12px rgba(0, 0, 0, 0.14);
+}
+
+body[data-design-mode="starbucks"] .hero-media::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  right: 42px;
+  bottom: 40px;
+  width: 16px;
+  height: 18px;
+  border: 2px solid #ffffff;
+  border-top: 0;
+  border-radius: 2px 2px 6px 6px;
+}
+
+body[data-design-mode="starbucks"] .hero-media figcaption {
+  right: 96px;
+  color: rgba(0, 0, 0, 0.72);
+  border-color: rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+body[data-design-mode="starbucks"] .hero-design-shortcuts {
+  border-color: rgba(0, 98, 65, 0.2);
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow:
+    0 0 0.5px rgba(0, 0, 0, 0.14),
+    0 1px 1px rgba(0, 0, 0, 0.24);
+}
+
+body[data-design-mode="starbucks"] .hero-design-shortcuts span {
+  color: #006241;
+}
+
+body[data-design-mode="starbucks"] .hero-design-shortcuts button {
+  color: #00754a;
+  border-color: #00754a;
+  border-radius: 50px;
+  background: transparent;
+}
+
+body[data-design-mode="starbucks"] .hero-design-shortcuts button.is-active {
+  color: #ffffff;
+  border-color: #00754a;
+  background: #00754a;
+}
+
 .button {
   display: inline-flex;
   align-items: center;
