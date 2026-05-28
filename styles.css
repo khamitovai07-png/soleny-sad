@@ -472,6 +472,122 @@ body[data-design-mode="clickhouse"] .hero-design-shortcuts button.is-active {
   background: #faff69;
 }
 
+body[data-design-mode="garden-lab"] {
+  background: #12190f;
+}
+
+body[data-design-mode="garden-lab"] .site-header {
+  color: #f9efd6;
+  border-bottom-color: rgba(232, 215, 170, 0.18);
+  background: rgba(18, 25, 15, 0.88);
+}
+
+body[data-design-mode="garden-lab"] .main-nav {
+  color: #d8caa5;
+}
+
+body[data-design-mode="garden-lab"] .header-action {
+  color: #fff8dc;
+  border-color: rgba(255, 248, 220, 0.34);
+  background: rgba(123, 33, 55, 0.52);
+}
+
+body[data-design-mode="garden-lab"] .hero {
+  color: #fff8dc;
+  background:
+    radial-gradient(circle at 84% 22%, rgba(192, 44, 86, 0.4), transparent 28%),
+    radial-gradient(circle at 14% 76%, rgba(176, 141, 70, 0.36), transparent 32%),
+    linear-gradient(135deg, #0f1d11 0%, #182813 48%, #3b1425 100%);
+}
+
+body[data-design-mode="garden-lab"] .hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(255, 248, 220, 0.08) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(255, 248, 220, 0.05) 1px, transparent 1px);
+  background-size: 84px 84px;
+  mask-image: linear-gradient(90deg, #000, transparent 72%);
+}
+
+body[data-design-mode="garden-lab"] .eyebrow {
+  color: #ffcf5a;
+}
+
+body[data-design-mode="garden-lab"] h1 {
+  color: #fff8dc;
+  text-shadow: 0 14px 42px rgba(192, 44, 86, 0.28);
+}
+
+body[data-design-mode="garden-lab"] .hero-subtitle {
+  color: #ffcf5a;
+}
+
+body[data-design-mode="garden-lab"] .hero-lead {
+  color: #eadfbe;
+}
+
+body[data-design-mode="garden-lab"] .hero-notes span {
+  color: #fff8dc;
+  border-color: rgba(255, 207, 90, 0.34);
+  background: rgba(15, 29, 17, 0.54);
+}
+
+body[data-design-mode="garden-lab"] .button-primary {
+  color: #1a120a;
+  border-color: #ffcf5a;
+  background: #ffcf5a;
+  box-shadow: 0 16px 34px rgba(255, 207, 90, 0.18);
+}
+
+body[data-design-mode="garden-lab"] .button-secondary {
+  color: #fff8dc;
+  border-color: rgba(255, 248, 220, 0.42);
+  background: rgba(255, 248, 220, 0.08);
+}
+
+body[data-design-mode="garden-lab"] .hero-media {
+  border: 1px solid rgba(255, 207, 90, 0.28);
+  border-radius: 28px 8px 28px 8px;
+  background: #172115;
+  box-shadow:
+    0 0 0 12px rgba(255, 207, 90, 0.06),
+    0 32px 90px rgba(0, 0, 0, 0.38);
+}
+
+body[data-design-mode="garden-lab"] .hero-media img {
+  filter: saturate(1.18) contrast(1.06);
+}
+
+body[data-design-mode="garden-lab"] .hero-media figcaption {
+  color: #fff8dc;
+  border-color: rgba(255, 207, 90, 0.26);
+  background: rgba(18, 25, 15, 0.74);
+}
+
+body[data-design-mode="garden-lab"] .hero-design-shortcuts {
+  border-color: rgba(255, 207, 90, 0.36);
+  background: rgba(18, 25, 15, 0.82);
+}
+
+body[data-design-mode="garden-lab"] .hero-design-shortcuts span {
+  color: #ffcf5a;
+}
+
+body[data-design-mode="garden-lab"] .hero-design-shortcuts button {
+  color: #fff8dc;
+  border-color: rgba(255, 248, 220, 0.24);
+  background: rgba(255, 248, 220, 0.08);
+}
+
+body[data-design-mode="garden-lab"] .hero-design-shortcuts button.is-active {
+  color: #1a120a;
+  border-color: #ffcf5a;
+  background: #ffcf5a;
+}
+
 .button {
   display: inline-flex;
   align-items: center;
