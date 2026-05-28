@@ -20,7 +20,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
   <link rel="preload" href="assets/images/jars-luxury-studio.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=20260528-draggable-buttons">
+  <link rel="stylesheet" href="styles.css?v=20260528-drag-handle">
   <link rel="stylesheet" href="craft.css?v=20260528-seo-speed">
   <script type="application/ld+json">
     {
@@ -149,7 +149,7 @@
           темная ткань на крышке, тонкая веревка и аккуратная наклейка с названием вкуса.
         </p>
         <div class="hero-design-shortcuts" aria-label="Быстро примерить дизайн" data-draggable-design-panel>
-          <span title="Потяните, чтобы переместить блок">Примерить дизайн:</span>
+          <span class="design-drag-handle" title="Потяните, чтобы переместить блок" data-drag-handle>↕ Примерить дизайн</span>
           <button class="is-active" type="button" aria-pressed="true" data-design-jump="original">Основной</button>
           <button type="button" aria-pressed="false" data-design-jump="airtable">Airtable</button>
           <button type="button" aria-pressed="false" data-design-jump="bugatti">Bugatti</button>
@@ -807,8 +807,12 @@
         window.localStorage.removeItem(storageKey);
       }
 
-      panel.addEventListener("pointerdown", (event) => {
-        if (event.target.closest("button")) return;
+      const handle = panel.querySelector("[data-drag-handle]");
+      if (!handle) return;
+
+      handle.addEventListener("pointerdown", (event) => {
+        if (event.button !== 0 && event.pointerType === "mouse") return;
+        event.preventDefault();
 
         const heroRect = hero.getBoundingClientRect();
         const panelRect = panel.getBoundingClientRect();
@@ -818,7 +822,7 @@
         const startY = event.clientY;
 
         panel.classList.add("is-dragging");
-        panel.setPointerCapture(event.pointerId);
+        handle.setPointerCapture(event.pointerId);
 
         const movePanel = (moveEvent) => {
           const next = placePanel(
@@ -830,14 +834,17 @@
 
         const stopDrag = () => {
           panel.classList.remove("is-dragging");
-          panel.removeEventListener("pointermove", movePanel);
-          panel.removeEventListener("pointerup", stopDrag);
-          panel.removeEventListener("pointercancel", stopDrag);
+          if (handle.hasPointerCapture(event.pointerId)) {
+            handle.releasePointerCapture(event.pointerId);
+          }
+          handle.removeEventListener("pointermove", movePanel);
+          handle.removeEventListener("pointerup", stopDrag);
+          handle.removeEventListener("pointercancel", stopDrag);
         };
 
-        panel.addEventListener("pointermove", movePanel);
-        panel.addEventListener("pointerup", stopDrag);
-        panel.addEventListener("pointercancel", stopDrag);
+        handle.addEventListener("pointermove", movePanel);
+        handle.addEventListener("pointerup", stopDrag);
+        handle.addEventListener("pointercancel", stopDrag);
       });
 
       window.addEventListener("resize", () => {
