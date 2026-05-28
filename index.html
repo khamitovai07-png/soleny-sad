@@ -20,7 +20,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
   <link rel="preload" href="assets/images/jars-luxury-studio.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=20260528-small-hand-cursor">
+  <link rel="stylesheet" href="styles.css?v=20260528-slim-hand-stable-clicks">
   <link rel="stylesheet" href="craft.css?v=20260528-seo-speed">
   <script type="application/ld+json">
     {
@@ -872,10 +872,12 @@
           return;
         }
 
-        event.preventDefault();
         const distance = Math.hypot(event.clientX - dragState.startX, event.clientY - dragState.startY);
+        if (!dragState.didDrag && distance < 8) return;
+
+        event.preventDefault();
         dragState.didDrag = true;
-        dragState.shouldSuppressClick = distance > 2;
+        dragState.shouldSuppressClick = true;
         panel.classList.add("is-dragging");
         document.body.classList.add("is-design-panel-dragging");
 
