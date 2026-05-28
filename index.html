@@ -20,7 +20,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
   <link rel="preload" href="assets/images/jars-luxury-studio.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=20260528-drag-handle">
+  <link rel="stylesheet" href="styles.css?v=20260528-panel-drag-area">
   <link rel="stylesheet" href="craft.css?v=20260528-seo-speed">
   <script type="application/ld+json">
     {
@@ -149,7 +149,7 @@
           темная ткань на крышке, тонкая веревка и аккуратная наклейка с названием вкуса.
         </p>
         <div class="hero-design-shortcuts" aria-label="Быстро примерить дизайн" data-draggable-design-panel>
-          <span class="design-drag-handle" title="Потяните, чтобы переместить блок" data-drag-handle>↕ Примерить дизайн</span>
+          <span class="design-drag-handle" title="Потяните любую часть блока, чтобы переместить">↕ Примерить дизайн</span>
           <button class="is-active" type="button" aria-pressed="true" data-design-jump="original">Основной</button>
           <button type="button" aria-pressed="false" data-design-jump="airtable">Airtable</button>
           <button type="button" aria-pressed="false" data-design-jump="bugatti">Bugatti</button>
@@ -807,12 +807,17 @@
         window.localStorage.removeItem(storageKey);
       }
 
-      const handle = panel.querySelector("[data-drag-handle]");
-      if (!handle) return;
+      let suppressClick = false;
 
-      handle.addEventListener("pointerdown", (event) => {
-        if (event.button !== 0 && event.pointerType === "mouse") return;
+      panel.addEventListener("click", (event) => {
+        if (!suppressClick) return;
         event.preventDefault();
+        event.stopPropagation();
+        suppressClick = false;
+      }, true);
+
+      panel.addEventListener("pointerdown", (event) => {
+        if (event.button !== 0 && event.pointerType === "mouse") return;
 
         const heroRect = hero.getBoundingClientRect();
         const panelRect = panel.getBoundingClientRect();
@@ -820,11 +825,16 @@
         const startTop = panelRect.top - heroRect.top;
         const startX = event.clientX;
         const startY = event.clientY;
+        let didDrag = false;
 
-        panel.classList.add("is-dragging");
-        handle.setPointerCapture(event.pointerId);
+        panel.setPointerCapture(event.pointerId);
 
         const movePanel = (moveEvent) => {
+          const distance = Math.hypot(moveEvent.clientX - startX, moveEvent.clientY - startY);
+          if (!didDrag && distance < 4) return;
+          didDrag = true;
+          suppressClick = true;
+          panel.classList.add("is-dragging");
           const next = placePanel(
             startLeft + moveEvent.clientX - startX,
             startTop + moveEvent.clientY - startY
@@ -834,17 +844,18 @@
 
         const stopDrag = () => {
           panel.classList.remove("is-dragging");
-          if (handle.hasPointerCapture(event.pointerId)) {
-            handle.releasePointerCapture(event.pointerId);
+          if (panel.hasPointerCapture(event.pointerId)) {
+            panel.releasePointerCapture(event.pointerId);
           }
-          handle.removeEventListener("pointermove", movePanel);
-          handle.removeEventListener("pointerup", stopDrag);
-          handle.removeEventListener("pointercancel", stopDrag);
+          panel.removeEventListener("pointermove", movePanel);
+          panel.removeEventListener("pointerup", stopDrag);
+          panel.removeEventListener("pointercancel", stopDrag);
+          if (!didDrag) suppressClick = false;
         };
 
-        handle.addEventListener("pointermove", movePanel);
-        handle.addEventListener("pointerup", stopDrag);
-        handle.addEventListener("pointercancel", stopDrag);
+        panel.addEventListener("pointermove", movePanel);
+        panel.addEventListener("pointerup", stopDrag);
+        panel.addEventListener("pointercancel", stopDrag);
       });
 
       window.addEventListener("resize", () => {
