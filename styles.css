@@ -102,6 +102,7 @@ a {
   padding: clamp(48px, 6vw, 86px) clamp(20px, 5vw, 68px) 58px;
   background:
     linear-gradient(90deg, rgba(255, 249, 239, 0.72) 0 44%, rgba(66, 52, 38, 0.08) 44% 100%),
+    repeating-linear-gradient(90deg, rgba(84, 65, 42, 0.04) 0 1px, transparent 1px 92px),
     linear-gradient(180deg, #f7efe3, #e5d3bd);
 }
 
@@ -190,27 +191,26 @@ h3 {
 }
 
 .hero-design-shortcuts {
-  position: absolute;
+  position: relative;
   z-index: 3;
-  top: auto;
-  right: clamp(16px, 2.2vw, 34px);
-  bottom: clamp(96px, 8vw, 132px);
-  display: grid;
-  width: min(210px, calc(100vw - 32px));
+  display: flex;
+  flex-wrap: wrap;
+  width: fit-content;
+  max-width: 100%;
   align-items: center;
-  gap: 7px;
-  margin-top: 0;
+  gap: 8px;
+  margin-top: 24px;
   border: 1px solid rgba(85, 63, 38, 0.22);
   border-radius: 12px;
-  padding: 10px;
+  padding: 8px;
   color: var(--ink);
   background: rgba(255, 249, 239, 0.88);
   box-shadow: 0 18px 46px rgba(45, 34, 22, 0.16);
   backdrop-filter: blur(18px);
   font-size: 12px;
-  cursor: grab;
+  cursor: default;
   user-select: none;
-  touch-action: none;
+  touch-action: auto;
 }
 
 .hero-design-shortcuts.is-moved {
@@ -222,50 +222,18 @@ h3 {
 
 .hero-design-shortcuts.is-dragging {
   cursor: grabbing;
-  pointer-events: none;
   transition: none;
-}
-
-body.is-design-panel-dragging,
-body.is-design-panel-dragging * {
-  cursor: none !important;
-  user-select: none !important;
-}
-
-.design-grab-cursor {
-  position: fixed;
-  z-index: 9999;
-  left: var(--grab-x, -100px);
-  top: var(--grab-y, -100px);
-  display: grid;
-  width: 36px;
-  height: 36px;
-  place-items: center;
-  border: 1px solid rgba(39, 34, 27, 0.14);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.96);
-  box-shadow: 0 10px 26px rgba(39, 34, 27, 0.2);
-  color: var(--charcoal);
-  font-size: 21px;
-  line-height: 1;
-  opacity: 0;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  transition: opacity 90ms ease;
-}
-
-.design-grab-cursor.is-visible {
-  opacity: 1;
 }
 
 .design-drag-handle {
   display: flex;
-  min-height: 30px;
+  min-height: 36px;
   align-items: center;
   justify-content: center;
   margin-right: 0;
   border: 1px dashed rgba(85, 63, 38, 0.22);
   border-radius: 8px;
+  padding: 0 12px;
   color: var(--beet);
   background: rgba(255, 249, 239, 0.55);
   font-size: 11px;
@@ -283,7 +251,7 @@ body.is-design-panel-dragging * {
   background: rgba(255, 249, 239, 0.76);
   font: inherit;
   font-weight: 900;
-  cursor: grab;
+  cursor: pointer;
   transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease, color 180ms ease;
 }
 
@@ -454,7 +422,9 @@ body[data-design-mode="clickhouse"] .header-action {
 
 body[data-design-mode="clickhouse"] .hero {
   color: #ffffff;
-  background: #0a0a0a;
+  background:
+    repeating-linear-gradient(90deg, rgba(250, 255, 105, 0.08) 0 1px, transparent 1px 96px),
+    #0a0a0a;
 }
 
 body[data-design-mode="clickhouse"] h1,
@@ -551,6 +521,18 @@ body[data-design-mode="garden-lab"] .hero {
     radial-gradient(circle at 84% 22%, rgba(192, 44, 86, 0.4), transparent 28%),
     radial-gradient(circle at 14% 76%, rgba(176, 141, 70, 0.36), transparent 32%),
     linear-gradient(135deg, #0f1d11 0%, #182813 48%, #3b1425 100%);
+}
+
+body[data-design-mode="garden-lab"] .hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(255, 248, 220, 0.08) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(255, 248, 220, 0.05) 1px, transparent 1px);
+  background-size: 84px 84px;
+  mask-image: linear-gradient(90deg, #000, transparent 72%);
 }
 
 body[data-design-mode="garden-lab"] .eyebrow {
@@ -846,7 +828,9 @@ body[data-design-mode="starbucks"] .hero-design-shortcuts button.is-active {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(180deg, rgba(255, 249, 239, 0.84), rgba(226, 211, 190, 0.92));
+  background:
+    linear-gradient(180deg, rgba(255, 249, 239, 0.84), rgba(226, 211, 190, 0.92)),
+    repeating-linear-gradient(0deg, rgba(50, 39, 27, 0.04) 0 1px, transparent 1px 78px);
   box-shadow: var(--deep-shadow);
 }
 
@@ -1821,6 +1805,336 @@ body[data-design-mode="starbucks"] .hero-design-shortcuts button.is-active {
   color: var(--muted);
 }
 
+body[data-design-mode="starbucks"] {
+  --ink: rgba(0, 0, 0, 0.87);
+  --muted: rgba(0, 0, 0, 0.58);
+  --paper: #f2f0eb;
+  --paper-soft: #edebe9;
+  --milk: #ffffff;
+  --line: rgba(0, 0, 0, 0.1);
+  --charcoal: #1e3932;
+  --beet: #006241;
+  --leaf: #00754a;
+  --gold: #cba258;
+  --shadow: 0 0 0.5px rgba(0, 0, 0, 0.14), 0 1px 1px rgba(0, 0, 0, 0.24);
+  --deep-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.06), 0 0 2px rgba(0, 0, 0, 0.07);
+}
+
+body[data-design-mode="starbucks"] h1,
+body[data-design-mode="starbucks"] h2,
+body[data-design-mode="starbucks"] h3,
+body[data-design-mode="starbucks"] .intro-band strong,
+body[data-design-mode="starbucks"] .benefits-grid strong,
+body[data-design-mode="starbucks"] .set-panel h3,
+body[data-design-mode="starbucks"] .craft-grid h3,
+body[data-design-mode="starbucks"] .occasion-grid strong,
+body[data-design-mode="starbucks"] .pairing-grid strong,
+body[data-design-mode="starbucks"] .story-list strong,
+body[data-design-mode="starbucks"] .delivery-grid strong,
+body[data-design-mode="starbucks"] .reviews-grid p,
+body[data-design-mode="starbucks"] .faq-list summary,
+body[data-design-mode="starbucks"] .contacts-grid strong {
+  font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+body[data-design-mode="starbucks"] .section,
+body[data-design-mode="starbucks"] .sets-section,
+body[data-design-mode="starbucks"] .craft-section,
+body[data-design-mode="starbucks"] .serving-section,
+body[data-design-mode="starbucks"] .story-section,
+body[data-design-mode="starbucks"] .delivery-section,
+body[data-design-mode="starbucks"] .faq-section,
+body[data-design-mode="starbucks"] .contacts-section,
+body[data-design-mode="starbucks"] .order-section {
+  background: #f2f0eb;
+}
+
+body[data-design-mode="starbucks"] .benefits-section,
+body[data-design-mode="starbucks"] .gift-section,
+body[data-design-mode="starbucks"] .reviews-section {
+  background: #edebe9;
+}
+
+body[data-design-mode="starbucks"] .intro-band,
+body[data-design-mode="starbucks"] .delivery-grid {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+body[data-design-mode="starbucks"] .intro-band div,
+body[data-design-mode="starbucks"] .benefits-grid article,
+body[data-design-mode="starbucks"] .product-card,
+body[data-design-mode="starbucks"] .set-panel,
+body[data-design-mode="starbucks"] .craft-grid article,
+body[data-design-mode="starbucks"] .occasion-grid article,
+body[data-design-mode="starbucks"] .pairing-grid article,
+body[data-design-mode="starbucks"] .story-list div,
+body[data-design-mode="starbucks"] .delivery-grid div,
+body[data-design-mode="starbucks"] .reviews-grid blockquote,
+body[data-design-mode="starbucks"] .faq-list details,
+body[data-design-mode="starbucks"] .contacts-grid a,
+body[data-design-mode="starbucks"] .order-card,
+body[data-design-mode="starbucks"] .serving-hero,
+body[data-design-mode="starbucks"] .serving-photo,
+body[data-design-mode="starbucks"] .gift-visual {
+  border-radius: 12px;
+  border-color: rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  box-shadow: var(--shadow);
+}
+
+body[data-design-mode="starbucks"] .product-card-featured,
+body[data-design-mode="starbucks"] .featured-set {
+  background: #d4e9e2;
+}
+
+body[data-design-mode="starbucks"] .product-card-wide,
+body[data-design-mode="starbucks"] .order-card {
+  background: #faf6ee;
+}
+
+body[data-design-mode="starbucks"] .product-card-dark {
+  color: #ffffff;
+  background: #1e3932;
+}
+
+body[data-design-mode="starbucks"] .product-card-dark .product-info p:not(.product-volume),
+body[data-design-mode="starbucks"] .product-card-dark .product-meta {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+body[data-design-mode="starbucks"] .product-card-dark .product-volume {
+  color: #cba258;
+}
+
+body[data-design-mode="starbucks"] .product-photo,
+body[data-design-mode="starbucks"] .craft-photo {
+  background: #edebe9;
+}
+
+body[data-design-mode="starbucks"] .set-panel .button-primary,
+body[data-design-mode="starbucks"] .contact-actions .button-primary {
+  color: #ffffff;
+  border-color: #00754a;
+  background: #00754a;
+}
+
+body[data-design-mode="starbucks"] .set-panel .button-secondary,
+body[data-design-mode="starbucks"] .contact-actions .button-secondary {
+  color: #00754a;
+  border-color: #00754a;
+  background: transparent;
+}
+
+body[data-design-mode="airtable"] {
+  --ink: #181d26;
+  --muted: #333840;
+  --paper: #ffffff;
+  --paper-soft: #f8fafc;
+  --milk: #ffffff;
+  --line: #dddddd;
+  --charcoal: #181d26;
+  --beet: #aa2d00;
+  --leaf: #0a2e0e;
+  --gold: #d9a441;
+  --shadow: none;
+  --deep-shadow: none;
+  color: #181d26;
+  background: #ffffff;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body[data-design-mode="airtable"] .site-header {
+  color: #181d26;
+  border-bottom-color: #dddddd;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: none;
+}
+
+body[data-design-mode="airtable"] .brand,
+body[data-design-mode="airtable"] h1,
+body[data-design-mode="airtable"] h2,
+body[data-design-mode="airtable"] h3,
+body[data-design-mode="airtable"] .intro-band strong,
+body[data-design-mode="airtable"] .benefits-grid strong,
+body[data-design-mode="airtable"] .set-panel h3,
+body[data-design-mode="airtable"] .craft-grid h3,
+body[data-design-mode="airtable"] .occasion-grid strong,
+body[data-design-mode="airtable"] .pairing-grid strong,
+body[data-design-mode="airtable"] .story-list strong,
+body[data-design-mode="airtable"] .delivery-grid strong,
+body[data-design-mode="airtable"] .reviews-grid p,
+body[data-design-mode="airtable"] .faq-list summary,
+body[data-design-mode="airtable"] .contacts-grid strong {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+}
+
+body[data-design-mode="airtable"] h1 {
+  max-width: 720px;
+  font-size: clamp(58px, 6.7vw, 108px);
+  line-height: 1.02;
+}
+
+body[data-design-mode="airtable"] h2 {
+  font-size: clamp(34px, 4.2vw, 56px);
+  line-height: 1.1;
+}
+
+body[data-design-mode="airtable"] .eyebrow {
+  color: #aa2d00;
+  letter-spacing: 0.1em;
+}
+
+body[data-design-mode="airtable"] .hero {
+  min-height: auto;
+  padding-top: clamp(72px, 9vw, 124px);
+  padding-bottom: clamp(72px, 9vw, 124px);
+  background: #ffffff;
+}
+
+body[data-design-mode="airtable"] .hero-media {
+  border: 1px solid #dddddd;
+  border-radius: 12px;
+  background: #f5e9d4;
+}
+
+body[data-design-mode="airtable"] .section,
+body[data-design-mode="airtable"] .sets-section,
+body[data-design-mode="airtable"] .craft-section,
+body[data-design-mode="airtable"] .serving-section,
+body[data-design-mode="airtable"] .story-section,
+body[data-design-mode="airtable"] .delivery-section,
+body[data-design-mode="airtable"] .faq-section,
+body[data-design-mode="airtable"] .contacts-section,
+body[data-design-mode="airtable"] .order-section {
+  background: #ffffff;
+}
+
+body[data-design-mode="airtable"] .benefits-section,
+body[data-design-mode="airtable"] .reviews-section {
+  background: #f8fafc;
+}
+
+body[data-design-mode="airtable"] .intro-band,
+body[data-design-mode="airtable"] .delivery-grid {
+  gap: 24px;
+  padding: clamp(24px, 4vw, 48px);
+  background: #ffffff;
+}
+
+body[data-design-mode="airtable"] .intro-band div,
+body[data-design-mode="airtable"] .benefits-grid article,
+body[data-design-mode="airtable"] .product-card,
+body[data-design-mode="airtable"] .set-panel,
+body[data-design-mode="airtable"] .craft-grid article,
+body[data-design-mode="airtable"] .occasion-grid article,
+body[data-design-mode="airtable"] .pairing-grid article,
+body[data-design-mode="airtable"] .story-list div,
+body[data-design-mode="airtable"] .delivery-grid div,
+body[data-design-mode="airtable"] .reviews-grid blockquote,
+body[data-design-mode="airtable"] .faq-list details,
+body[data-design-mode="airtable"] .contacts-grid a,
+body[data-design-mode="airtable"] .order-card {
+  border-radius: 12px;
+  border-color: #dddddd;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+body[data-design-mode="airtable"] .product-card-featured,
+body[data-design-mode="airtable"] .featured-set {
+  color: #ffffff;
+  border-color: #aa2d00;
+  background: #aa2d00;
+}
+
+body[data-design-mode="airtable"] .product-card-featured p,
+body[data-design-mode="airtable"] .featured-set p,
+body[data-design-mode="airtable"] .featured-set .set-count {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+body[data-design-mode="airtable"] .product-card-wide {
+  background: #f5e9d4;
+}
+
+body[data-design-mode="airtable"] .product-card-dark {
+  color: #ffffff;
+  background: #181d26;
+}
+
+body[data-design-mode="airtable"] .product-card-dark .product-info p:not(.product-volume),
+body[data-design-mode="airtable"] .product-card-dark .product-meta {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+body[data-design-mode="airtable"] .product-photo,
+body[data-design-mode="airtable"] .craft-photo {
+  background: #f8fafc;
+}
+
+body[data-design-mode="airtable"] .gift-section {
+  background: #f5e9d4;
+}
+
+body[data-design-mode="airtable"] .serving-hero,
+body[data-design-mode="airtable"] .serving-photo,
+body[data-design-mode="airtable"] .gift-visual {
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+body[data-design-mode="airtable"] .button,
+body[data-design-mode="airtable"] .header-action {
+  border-radius: 12px;
+}
+
+body[data-design-mode="airtable"] .button-primary,
+body[data-design-mode="airtable"] .header-action,
+body[data-design-mode="airtable"] .contact-actions .button-primary {
+  color: #ffffff;
+  border-color: #181d26;
+  background: #181d26;
+  box-shadow: none;
+}
+
+body[data-design-mode="airtable"] .button-secondary,
+body[data-design-mode="airtable"] .contact-actions .button-secondary {
+  color: #181d26;
+  border-color: #dddddd;
+  background: #ffffff;
+}
+
+body[data-design-mode="airtable"] .hero-design-shortcuts {
+  border-color: #dddddd;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+body[data-design-mode="airtable"] .hero-design-shortcuts button {
+  color: #181d26;
+  border-color: #dddddd;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+body[data-design-mode="airtable"] .hero-design-shortcuts button.is-active {
+  color: #ffffff;
+  border-color: #181d26;
+  background: #181d26;
+}
+
+body[data-design-mode="airtable"] .hero-design-shortcuts button:active,
+body[data-design-mode="starbucks"] .hero-design-shortcuts button:active {
+  transform: scale(0.95);
+}
+
+.hero-design-shortcuts button {
+  cursor: pointer;
+}
+
 @media (max-width: 1100px) {
   .site-header {
     grid-template-columns: auto 1fr;
@@ -1905,6 +2219,14 @@ body[data-design-mode="starbucks"] .hero-design-shortcuts button.is-active {
   .hero {
     padding-top: 34px;
     background: linear-gradient(180deg, #f7efe3, #e9dac7);
+  }
+
+  body[data-design-mode="starbucks"] .hero {
+    background: #f2f0eb;
+  }
+
+  body[data-design-mode="airtable"] .hero {
+    background: #ffffff;
   }
 
   .hero-design-shortcuts {
