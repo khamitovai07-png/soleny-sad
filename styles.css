@@ -466,6 +466,25 @@ h3 {
   text-transform: uppercase;
 }
 
+.product-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: -2px 0 14px;
+}
+
+.product-tags span {
+  border: 1px solid rgba(85, 63, 38, 0.16);
+  border-radius: 999px;
+  padding: 6px 9px;
+  color: #5d4c37;
+  background: rgba(240, 228, 211, 0.52);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
 .product-card-dark .product-volume {
   color: var(--beet);
 }
@@ -743,6 +762,89 @@ h3 {
 }
 
 .occasion-grid p {
+  margin: 14px 0 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.serving-section {
+  background:
+    linear-gradient(180deg, rgba(255, 249, 239, 0.78), rgba(240, 228, 211, 0.28)),
+    var(--paper);
+}
+
+.serving-layout {
+  display: grid;
+  grid-template-columns: minmax(420px, 1.08fr) minmax(360px, 0.92fr);
+  gap: clamp(20px, 4vw, 52px);
+  align-items: stretch;
+}
+
+.serving-hero {
+  position: relative;
+  min-height: 580px;
+  margin: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #ded0bc;
+  box-shadow: var(--deep-shadow);
+}
+
+.serving-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.serving-hero figcaption {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+  max-width: 480px;
+  border: 1px solid rgba(85, 63, 38, 0.16);
+  border-radius: 8px;
+  padding: 16px 18px;
+  color: var(--muted);
+  background: rgba(255, 249, 239, 0.86);
+  backdrop-filter: blur(14px);
+  line-height: 1.45;
+}
+
+.pairing-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.pairing-grid article {
+  min-height: 230px;
+  border: 1px solid rgba(85, 63, 38, 0.18);
+  border-radius: 8px;
+  padding: 22px;
+  background: var(--milk);
+  box-shadow: 0 18px 44px rgba(45, 34, 22, 0.08);
+}
+
+.pairing-grid span {
+  display: block;
+  margin-bottom: 22px;
+  color: var(--beet);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+}
+
+.pairing-grid strong {
+  display: block;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(26px, 2.4vw, 34px);
+  font-weight: 400;
+  line-height: 1.08;
+}
+
+.pairing-grid p {
   margin: 14px 0 0;
   color: var(--muted);
   line-height: 1.5;
@@ -1112,7 +1214,7 @@ h3 {
 
 @media (max-width: 1100px) {
   .site-header {
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto 1fr;
   }
 
   .main-nav {
@@ -1124,6 +1226,7 @@ h3 {
   }
 
   .hero,
+  .serving-layout,
   .story-section,
   .benefits-section,
   .gift-section,
@@ -1143,6 +1246,7 @@ h3 {
 
   .section-heading,
   .sets-layout,
+  .pairing-grid,
   .story-list,
   .craft-grid,
   .reviews-grid,
@@ -1170,11 +1274,19 @@ h3 {
 @media (max-width: 720px) {
   .site-header {
     height: auto;
-    display: block;
+    display: grid;
+    grid-template-columns: 1fr auto;
     padding: 18px 20px;
   }
 
+  .brand {
+    align-self: center;
+  }
+
   .main-nav {
+    grid-column: 1 / -1;
+    justify-self: stretch;
+    width: 100%;
     margin-top: 14px;
     gap: 14px;
     overflow-x: auto;
@@ -1247,6 +1359,17 @@ h3 {
 
   .serving-photo img {
     height: 360px;
+  }
+
+  .serving-hero {
+    min-height: 430px;
+  }
+
+  .serving-hero figcaption {
+    position: static;
+    max-width: none;
+    border-radius: 0;
+    background: var(--milk);
   }
 
   .site-footer {
