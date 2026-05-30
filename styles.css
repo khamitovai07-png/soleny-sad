@@ -110,6 +110,36 @@ body {
   contain-intrinsic-size: 900px;
 }
 
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-on-scroll {
+    transition: opacity 620ms ease, transform 720ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .product-grid .reveal-on-scroll:nth-child(2n),
+  .story-list .reveal-on-scroll:nth-child(2),
+  .delivery-grid .reveal-on-scroll:nth-child(2),
+  .faq-list .reveal-on-scroll:nth-child(2n) {
+    transition-delay: 70ms;
+  }
+
+  .product-grid .reveal-on-scroll:nth-child(3n),
+  .story-list .reveal-on-scroll:nth-child(3),
+  .delivery-grid .reveal-on-scroll:nth-child(3),
+  .faq-list .reveal-on-scroll:nth-child(3n) {
+    transition-delay: 140ms;
+  }
+}
+
 img {
   display: block;
   max-width: 100%;
@@ -157,8 +187,34 @@ a {
 }
 
 .main-nav a:hover,
+.main-nav a.is-active,
+.main-nav a[aria-current="true"],
 .footer-links a:hover {
   color: var(--beet);
+}
+
+.main-nav a {
+  position: relative;
+}
+
+.main-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -8px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  opacity: 0;
+  transform: scaleX(0.3);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.main-nav a.is-active::after,
+.main-nav a[aria-current="true"]::after {
+  opacity: 0.75;
+  transform: scaleX(1);
 }
 
 .header-action {
@@ -1652,12 +1708,14 @@ body[data-design-mode="starbucks"] .hero-design-shortcuts button.is-active {
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(22px, 2.2vw, 34px);
   line-height: 1;
+  transition: opacity 520ms ease, transform 640ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .tradition-formula i {
   color: var(--gold);
   font-style: normal;
   font-weight: 900;
+  transition: opacity 420ms ease, transform 520ms ease;
 }
 
 .tradition-formula small {
@@ -1668,6 +1726,42 @@ body[data-design-mode="starbucks"] .hero-design-shortcuts button.is-active {
   letter-spacing: 0.1em;
   text-align: center;
   text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tradition-formula.reveal-on-scroll span,
+  .tradition-formula.reveal-on-scroll i,
+  .tradition-formula.reveal-on-scroll small {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  .tradition-formula.reveal-on-scroll.is-visible span,
+  .tradition-formula.reveal-on-scroll.is-visible i,
+  .tradition-formula.reveal-on-scroll.is-visible small {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .tradition-formula.reveal-on-scroll.is-visible span:nth-of-type(2) {
+    transition-delay: 110ms;
+  }
+
+  .tradition-formula.reveal-on-scroll.is-visible span:nth-of-type(3) {
+    transition-delay: 220ms;
+  }
+
+  .tradition-formula.reveal-on-scroll.is-visible i:first-of-type {
+    transition-delay: 70ms;
+  }
+
+  .tradition-formula.reveal-on-scroll.is-visible i:nth-of-type(2) {
+    transition-delay: 180ms;
+  }
+
+  .tradition-formula.reveal-on-scroll.is-visible small {
+    transition-delay: 290ms;
+  }
 }
 
 .serving-column {
@@ -1902,23 +1996,62 @@ body[data-design-mode="starbucks"] .hero-design-shortcuts button.is-active {
   padding: 20px 22px;
   background: rgba(255, 249, 239, 0.56);
   box-shadow: 0 14px 34px rgba(45, 34, 22, 0.06);
+  transition: background-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+}
+
+.faq-list details[open] {
+  background: rgba(255, 249, 239, 0.82);
+  box-shadow: 0 18px 42px rgba(45, 34, 22, 0.1);
 }
 
 .faq-list summary {
+  position: relative;
   cursor: pointer;
+  list-style: none;
   font-family: Georgia, "Times New Roman", serif;
   font-size: 24px;
   line-height: 1.1;
+  padding-right: 34px;
 }
 
-.faq-list summary::marker {
+.faq-list summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-list summary::after {
+  content: "+";
+  position: absolute;
+  top: -2px;
+  right: 0;
   color: var(--beet);
+  font-family: "Avenir Next", "Trebuchet MS", Verdana, sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1;
+  transition: transform 220ms ease;
+}
+
+.faq-list details[open] summary::after {
+  transform: rotate(45deg);
 }
 
 .faq-list p {
   margin: 14px 0 0;
   color: var(--muted);
   line-height: 1.5;
+  animation: faqAnswerIn 220ms ease;
+}
+
+@keyframes faqAnswerIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .contacts-section {
