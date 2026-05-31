@@ -24,7 +24,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
   <link rel="preload" href="assets/images/jars-luxury-studio.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=20260601-real-vegetable-builder">
+  <link rel="stylesheet" href="styles.css?v=20260601-builder-all-vegetables">
   <link rel="stylesheet" href="craft.css?v=20260528-seo-speed">
   <script type="application/ld+json">
     {
@@ -1208,7 +1208,7 @@
         count.textContent = formatCount(selected.length);
         summary.textContent = parts.length ? parts.join(", ") : "Пока ящик пуст. Добавьте первый вкус.";
         visuals.innerHTML = selected.length
-          ? selected.slice(0, 6).map((name) => {
+          ? selected.map((name) => {
             const visual = itemVisuals[name] || { sprite: "assorti", tone: "assorti", label: name };
             return `
               <figure class="crate-item crate-item-${visual.tone}">
