@@ -24,7 +24,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
   <link rel="preload" href="assets/images/jars-luxury-studio.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=20260601-builder-vegetables">
+  <link rel="stylesheet" href="styles.css?v=20260601-real-vegetable-builder">
   <link rel="stylesheet" href="craft.css?v=20260528-seo-speed">
   <script type="application/ld+json">
     {
@@ -1149,42 +1149,42 @@
       const optionButtons = [...root.querySelectorAll("[data-builder-item]")];
       const itemVisuals = {
         "Свекла с хреном": {
-          icon: "●",
+          sprite: "beet",
           tone: "beet",
           label: "Свекла"
         },
         "Огурцы с укропом": {
-          icon: "▰",
+          sprite: "pickle",
           tone: "pickle",
           label: "Огурцы"
         },
         "Капуста с тмином": {
-          icon: "✺",
+          sprite: "cabbage",
           tone: "cabbage",
           label: "Капуста"
         },
         "Соленые грибы": {
-          icon: "♣",
+          sprite: "mushroom",
           tone: "mushroom",
           label: "Грибы"
         },
         "Ассорти к русскому столу": {
-          icon: "✦",
+          sprite: "assorti",
           tone: "assorti",
           label: "Ассорти"
         },
         "Моченые яблоки": {
-          icon: "●",
+          sprite: "apple",
           tone: "apple",
           label: "Яблоки"
         },
         "Терн ферментированный": {
-          icon: "●",
+          sprite: "tern",
           tone: "tern",
           label: "Терн"
         },
         "Морковь с чесноком": {
-          icon: "◆",
+          sprite: "carrot",
           tone: "carrot",
           label: "Морковь"
         }
@@ -1209,10 +1209,10 @@
         summary.textContent = parts.length ? parts.join(", ") : "Пока ящик пуст. Добавьте первый вкус.";
         visuals.innerHTML = selected.length
           ? selected.slice(0, 6).map((name) => {
-            const visual = itemVisuals[name] || { icon: "●", tone: "assorti", label: name };
+            const visual = itemVisuals[name] || { sprite: "assorti", tone: "assorti", label: name };
             return `
               <figure class="crate-item crate-item-${visual.tone}">
-                <span aria-hidden="true">${visual.icon}</span>
+                <span class="vegetable-thumb vegetable-thumb-${visual.sprite}" aria-hidden="true"></span>
                 <figcaption>${visual.label}</figcaption>
               </figure>
             `;

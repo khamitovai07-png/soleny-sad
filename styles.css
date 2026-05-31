@@ -2103,20 +2103,47 @@ body[data-design-mode="clickhouse"] .cart-actions a {
   transform: translateY(-2px);
 }
 
-.crate-item span {
-  --veg: var(--beet);
-  width: 44px;
-  height: 44px;
-  display: grid;
-  place-items: center;
-  border-radius: 46% 54% 50% 50%;
-  color: rgba(255, 249, 239, 0.86);
-  background:
-    radial-gradient(circle at 34% 28%, rgba(255, 255, 255, 0.28), transparent 24%),
-    var(--veg);
-  box-shadow: inset -8px -10px 14px rgba(39, 34, 27, 0.16);
-  font-size: 22px;
-  line-height: 1;
+.vegetable-thumb {
+  width: 62px;
+  height: 62px;
+  display: block;
+  background-image: url("assets/images/vegetable-sprite.webp");
+  background-repeat: no-repeat;
+  background-size: 400% 200%;
+  filter: drop-shadow(0 7px 8px rgba(45, 34, 22, 0.18));
+  transform: translateY(-1px);
+}
+
+.vegetable-thumb-beet {
+  background-position: 0% 0%;
+}
+
+.vegetable-thumb-pickle {
+  background-position: 33.333% 0%;
+}
+
+.vegetable-thumb-cabbage {
+  background-position: 66.666% 0%;
+}
+
+.vegetable-thumb-mushroom {
+  background-position: 100% 0%;
+}
+
+.vegetable-thumb-assorti {
+  background-position: 0% 100%;
+}
+
+.vegetable-thumb-apple {
+  background-position: 33.333% 100%;
+}
+
+.vegetable-thumb-tern {
+  background-position: 66.666% 100%;
+}
+
+.vegetable-thumb-carrot {
+  background-position: 100% 100%;
 }
 
 .crate-item figcaption {
@@ -2126,45 +2153,6 @@ body[data-design-mode="clickhouse"] .cart-actions a {
   letter-spacing: 0.08em;
   text-align: center;
   text-transform: uppercase;
-}
-
-.crate-item-beet span {
-  --veg: #8b2435;
-}
-
-.crate-item-pickle span {
-  --veg: #4f653d;
-  width: 50px;
-  border-radius: 999px;
-}
-
-.crate-item-cabbage span {
-  --veg: #d8d4a1;
-  color: #4f653d;
-  border-radius: 54% 46% 58% 42%;
-}
-
-.crate-item-mushroom span {
-  --veg: #8b6b4b;
-  border-radius: 48% 48% 40% 40%;
-}
-
-.crate-item-assorti span {
-  --veg: #a8895d;
-}
-
-.crate-item-apple span {
-  --veg: #b8a24a;
-}
-
-.crate-item-tern span {
-  --veg: #33234f;
-}
-
-.crate-item-carrot span {
-  --veg: #d8792f;
-  border-radius: 56% 44% 64% 36%;
-  transform: rotate(45deg);
 }
 
 .crate-item-carrot figcaption {
