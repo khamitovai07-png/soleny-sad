@@ -2087,13 +2087,88 @@ body[data-design-mode="clickhouse"] .cart-actions a {
   transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
 }
 
-.crate-slots i.is-filled {
-  border-style: solid;
-  border-color: rgba(124, 45, 40, 0.28);
+.crate-item {
+  min-height: 86px;
+  display: grid;
+  place-items: center;
+  gap: 7px;
+  margin: 0;
+  border: 1px solid rgba(85, 63, 38, 0.18);
+  border-radius: 14px;
+  padding: 9px 6px 8px;
   background:
-    linear-gradient(180deg, rgba(39, 34, 27, 0.18) 0 18%, transparent 18%),
-    linear-gradient(180deg, rgba(255, 249, 239, 0.7), rgba(124, 45, 40, 0.22));
+    linear-gradient(180deg, rgba(255, 249, 239, 0.86), rgba(240, 228, 211, 0.64)),
+    var(--milk);
+  box-shadow: 0 10px 22px rgba(45, 34, 22, 0.1);
   transform: translateY(-2px);
+}
+
+.crate-item span {
+  --veg: var(--beet);
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 46% 54% 50% 50%;
+  color: rgba(255, 249, 239, 0.86);
+  background:
+    radial-gradient(circle at 34% 28%, rgba(255, 255, 255, 0.28), transparent 24%),
+    var(--veg);
+  box-shadow: inset -8px -10px 14px rgba(39, 34, 27, 0.16);
+  font-size: 22px;
+  line-height: 1;
+}
+
+.crate-item figcaption {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.crate-item-beet span {
+  --veg: #8b2435;
+}
+
+.crate-item-pickle span {
+  --veg: #4f653d;
+  width: 50px;
+  border-radius: 999px;
+}
+
+.crate-item-cabbage span {
+  --veg: #d8d4a1;
+  color: #4f653d;
+  border-radius: 54% 46% 58% 42%;
+}
+
+.crate-item-mushroom span {
+  --veg: #8b6b4b;
+  border-radius: 48% 48% 40% 40%;
+}
+
+.crate-item-assorti span {
+  --veg: #a8895d;
+}
+
+.crate-item-apple span {
+  --veg: #b8a24a;
+}
+
+.crate-item-tern span {
+  --veg: #33234f;
+}
+
+.crate-item-carrot span {
+  --veg: #d8792f;
+  border-radius: 56% 44% 64% 36%;
+  transform: rotate(45deg);
+}
+
+.crate-item-carrot figcaption {
+  margin-top: 2px;
 }
 
 .builder-crate p {

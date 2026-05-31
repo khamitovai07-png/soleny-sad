@@ -24,7 +24,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
   <link rel="preload" href="assets/images/jars-luxury-studio.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=20260601-fixed-design-switcher">
+  <link rel="stylesheet" href="styles.css?v=20260601-builder-vegetables">
   <link rel="stylesheet" href="craft.css?v=20260528-seo-speed">
   <script type="application/ld+json">
     {
@@ -636,9 +636,7 @@
         </div>
         <aside class="builder-crate" aria-live="polite">
           <span data-builder-count>0 баночек</span>
-          <div class="crate-slots" aria-hidden="true">
-            <i></i><i></i><i></i><i></i><i></i><i></i>
-          </div>
+          <div class="crate-slots" aria-hidden="true" data-builder-visuals></div>
           <p data-builder-summary>Пока ящик пуст. Добавьте первый вкус.</p>
           <div class="builder-actions">
             <button type="button" data-builder-clear>Очистить</button>
@@ -1147,8 +1145,50 @@
       const count = root.querySelector("[data-builder-count]");
       const summary = root.querySelector("[data-builder-summary]");
       const order = root.querySelector("[data-builder-order]");
-      const slots = [...root.querySelectorAll(".crate-slots i")];
+      const visuals = root.querySelector("[data-builder-visuals]");
       const optionButtons = [...root.querySelectorAll("[data-builder-item]")];
+      const itemVisuals = {
+        "Свекла с хреном": {
+          icon: "●",
+          tone: "beet",
+          label: "Свекла"
+        },
+        "Огурцы с укропом": {
+          icon: "▰",
+          tone: "pickle",
+          label: "Огурцы"
+        },
+        "Капуста с тмином": {
+          icon: "✺",
+          tone: "cabbage",
+          label: "Капуста"
+        },
+        "Соленые грибы": {
+          icon: "♣",
+          tone: "mushroom",
+          label: "Грибы"
+        },
+        "Ассорти к русскому столу": {
+          icon: "✦",
+          tone: "assorti",
+          label: "Ассорти"
+        },
+        "Моченые яблоки": {
+          icon: "●",
+          tone: "apple",
+          label: "Яблоки"
+        },
+        "Терн ферментированный": {
+          icon: "●",
+          tone: "tern",
+          label: "Терн"
+        },
+        "Морковь с чесноком": {
+          icon: "◆",
+          tone: "carrot",
+          label: "Морковь"
+        }
+      };
 
       const formatCount = (value) => {
         const last = value % 10;
@@ -1167,7 +1207,17 @@
 
         count.textContent = formatCount(selected.length);
         summary.textContent = parts.length ? parts.join(", ") : "Пока ящик пуст. Добавьте первый вкус.";
-        slots.forEach((slot, index) => slot.classList.toggle("is-filled", index < Math.min(selected.length, slots.length)));
+        visuals.innerHTML = selected.length
+          ? selected.slice(0, 6).map((name) => {
+            const visual = itemVisuals[name] || { icon: "●", tone: "assorti", label: name };
+            return `
+              <figure class="crate-item crate-item-${visual.tone}">
+                <span aria-hidden="true">${visual.icon}</span>
+                <figcaption>${visual.label}</figcaption>
+              </figure>
+            `;
+          }).join("")
+          : "<i></i><i></i><i></i><i></i><i></i><i></i>";
         optionButtons.forEach((button) => button.classList.toggle("is-added", totals.has(button.dataset.builderItem)));
 
         const body = parts.length
