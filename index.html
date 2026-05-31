@@ -24,7 +24,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
   <link rel="preload" href="assets/images/jars-luxury-studio.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=20260601-cart-icon-only">
+  <link rel="stylesheet" href="styles.css?v=20260601-header-cart">
   <link rel="stylesheet" href="craft.css?v=20260528-seo-speed">
   <script type="application/ld+json">
     {
@@ -139,7 +139,37 @@
       <a href="#delivery">Доставка</a>
       <a href="#contacts">Контакты</a>
     </nav>
-    <a class="header-action" href="#sets">Собрать набор</a>
+    <div class="header-tools">
+      <aside class="cart-widget" data-cart-widget aria-label="Корзина заказа">
+        <button class="cart-toggle" type="button" data-cart-toggle aria-expanded="false">
+          <span class="cart-icon" aria-hidden="true">▱</span>
+          <span>Корзина</span>
+          <strong data-cart-badge>0</strong>
+        </button>
+        <div class="cart-panel" data-cart-panel aria-live="polite">
+          <div class="cart-head">
+            <div>
+              <p class="eyebrow">ваш заказ</p>
+              <h2>Корзина</h2>
+            </div>
+            <button type="button" data-cart-close aria-label="Свернуть корзину">×</button>
+          </div>
+          <div class="cart-empty" data-cart-empty>
+            Добавьте баночки из витрины, и они появятся здесь.
+          </div>
+          <div class="cart-list" data-cart-list></div>
+          <div class="cart-total">
+            <span data-cart-total-count>0 баночек</span>
+            <strong data-cart-total-price>0 ₽</strong>
+          </div>
+          <div class="cart-actions">
+            <button type="button" data-cart-clear>Очистить</button>
+            <a data-cart-checkout href="mailto:ira.xamitova@inbox.ru?subject=Заказ Соленый сад&body=Здравствуйте! Хочу сделать заказ.">Оформить заказ</a>
+          </div>
+        </div>
+      </aside>
+      <a class="header-action" href="#sets">Собрать набор</a>
+    </div>
   </header>
 
   <main id="top">
@@ -957,35 +987,6 @@
       </div>
     </section>
   </main>
-
-  <aside class="cart-widget" data-cart-widget aria-label="Корзина заказа">
-    <button class="cart-toggle" type="button" data-cart-toggle aria-expanded="false">
-      <span class="cart-icon" aria-hidden="true">▱</span>
-      <span>Корзина</span>
-      <strong data-cart-badge>0</strong>
-    </button>
-    <div class="cart-panel" data-cart-panel aria-live="polite">
-      <div class="cart-head">
-        <div>
-          <p class="eyebrow">ваш заказ</p>
-          <h2>Корзина</h2>
-        </div>
-        <button type="button" data-cart-close aria-label="Свернуть корзину">×</button>
-      </div>
-      <div class="cart-empty" data-cart-empty>
-        Добавьте баночки из витрины, и они появятся здесь.
-      </div>
-      <div class="cart-list" data-cart-list></div>
-      <div class="cart-total">
-        <span data-cart-total-count>0 баночек</span>
-        <strong data-cart-total-price>0 ₽</strong>
-      </div>
-      <div class="cart-actions">
-        <button type="button" data-cart-clear>Очистить</button>
-        <a data-cart-checkout href="mailto:ira.xamitova@inbox.ru?subject=Заказ Соленый сад&body=Здравствуйте! Хочу сделать заказ.">Оформить заказ</a>
-      </div>
-    </div>
-  </aside>
 
   <footer class="site-footer">
     <div>
