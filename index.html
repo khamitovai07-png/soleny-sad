@@ -24,7 +24,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
   <link rel="preload" href="assets/images/jars-luxury-studio.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=20260601-delivery-icons">
+  <link rel="stylesheet" href="styles.css?v=20260601-benefit-plate">
   <link rel="stylesheet" href="craft.css?v=20260528-seo-speed">
   <script type="application/ld+json">
     {
@@ -238,6 +238,25 @@
           Мы не обещаем лечебный эффект: это честная еда с понятным составом,
           приготовленная методом молочнокислой ферментации.
         </p>
+        <div class="benefit-plate" data-benefit-plate>
+          <div class="benefit-plate-stage" aria-hidden="true">
+            <img class="benefit-plate-img" src="assets/images/plate-cutout.webp" width="1254" height="1254" loading="lazy" decoding="async" alt="">
+            <span class="benefit-food benefit-food-main vegetable-thumb vegetable-thumb-pickle"></span>
+            <span class="benefit-food benefit-food-side vegetable-thumb vegetable-thumb-beet"></span>
+            <span class="benefit-food benefit-food-accent vegetable-thumb vegetable-thumb-cabbage"></span>
+          </div>
+          <div class="benefit-plate-copy">
+            <span data-benefit-label>кислинка</span>
+            <strong data-benefit-title>Освежает плотные блюда</strong>
+            <p data-benefit-copy>Огурец и свекла добавляют картофелю, мясу и хлебу живую кислинку без тяжелого соуса.</p>
+          </div>
+          <div class="benefit-plate-controls" role="group" aria-label="Выбрать пользу ферментации">
+            <button class="is-selected" type="button" data-benefit-choice="sour">кислинка</button>
+            <button type="button" data-benefit-choice="crunch">хруст</button>
+            <button type="button" data-benefit-choice="vegetables">овощи</button>
+            <button type="button" data-benefit-choice="clean">без уксуса</button>
+          </div>
+        </div>
       </div>
       <div class="benefits-grid">
         <article>
@@ -1078,6 +1097,59 @@
     })();
 
     (() => {
+      const root = document.querySelector("[data-benefit-plate]");
+      if (!root) return;
+
+      const label = root.querySelector("[data-benefit-label]");
+      const title = root.querySelector("[data-benefit-title]");
+      const copy = root.querySelector("[data-benefit-copy]");
+      const foods = [...root.querySelectorAll(".benefit-food")];
+      const states = {
+        sour: {
+          label: "кислинка",
+          title: "Освежает плотные блюда",
+          copy: "Огурец и свекла добавляют картофелю, мясу и хлебу живую кислинку без тяжелого соуса.",
+          items: ["pickle", "beet", "cabbage"]
+        },
+        crunch: {
+          label: "хруст",
+          title: "Дает тарелке фактуру",
+          copy: "Огурец, капуста и морковь делают простой ужин более живым: появляется хруст и сочность.",
+          items: ["pickle", "cabbage", "carrot"]
+        },
+        vegetables: {
+          label: "овощи",
+          title: "Добавляет овощи каждый день",
+          copy: "Свекла, капуста и ассорти помогают быстро собрать овощную часть тарелки без готовки.",
+          items: ["beet", "cabbage", "assorti"]
+        },
+        clean: {
+          label: "без уксуса",
+          title: "Вкус держится на соли и времени",
+          copy: "Ферментация дает спокойную кислинку: овощи, соль, специи и время вместо резкого уксуса.",
+          items: ["cabbage", "apple", "pickle"]
+        }
+      };
+
+      const setBenefit = (key) => {
+        const next = states[key] || states.sour;
+        label.textContent = next.label;
+        title.textContent = next.title;
+        copy.textContent = next.copy;
+        foods.forEach((food, index) => {
+          food.className = `benefit-food ${["benefit-food-main", "benefit-food-side", "benefit-food-accent"][index]} vegetable-thumb vegetable-thumb-${next.items[index]}`;
+        });
+        root.querySelectorAll("[data-benefit-choice]").forEach((button) => {
+          button.classList.toggle("is-selected", button.dataset.benefitChoice === key);
+        });
+      };
+
+      root.querySelectorAll("[data-benefit-choice]").forEach((button) => {
+        button.addEventListener("click", () => setBenefit(button.dataset.benefitChoice));
+      });
+    })();
+
+    (() => {
       const root = document.querySelector("[data-taste-finder]");
       if (!root) return;
 
@@ -1466,7 +1538,7 @@
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       const revealItems = [
         ...document.querySelectorAll(
-          ".intro-band, .section-heading, .benefits-grid article, .product-card, .taste-finder, .set-panel, .gift-visual, .set-builder, .occasion-grid article, .serving-hero, .pairing-grid article, .serving-picker, .tradition-formula, .ferment-timeline, .story-list div, .delivery-grid div, .delivery-route li, .reviews-grid blockquote, .faq-note, .faq-list details, .contacts-grid a, .order-card"
+          ".intro-band, .section-heading, .benefit-plate, .benefits-grid article, .product-card, .taste-finder, .set-panel, .gift-visual, .set-builder, .occasion-grid article, .serving-hero, .pairing-grid article, .serving-picker, .tradition-formula, .ferment-timeline, .story-list div, .delivery-grid div, .delivery-route li, .reviews-grid blockquote, .faq-note, .faq-list details, .contacts-grid a, .order-card"
         )
       ];
 

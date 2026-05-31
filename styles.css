@@ -1086,6 +1086,111 @@ body[data-design-mode="starbucks"] .hero-design-shortcuts button.is-active {
   padding-left: 18px;
 }
 
+.benefit-plate {
+  max-width: 650px;
+  display: grid;
+  grid-template-columns: minmax(180px, 0.58fr) minmax(220px, 0.82fr);
+  gap: 16px;
+  align-items: center;
+  margin-top: 24px;
+  border: 1px solid rgba(86, 64, 38, 0.16);
+  border-radius: 12px;
+  padding: 16px;
+  background:
+    radial-gradient(circle at 16% 18%, rgba(255, 249, 239, 0.8), transparent 34%),
+    rgba(255, 249, 239, 0.52);
+  box-shadow: 0 18px 42px rgba(45, 34, 22, 0.08);
+}
+
+.benefit-plate-stage {
+  position: relative;
+  min-height: 210px;
+  display: grid;
+  place-items: center;
+}
+
+.benefit-plate-img {
+  width: min(220px, 100%);
+  height: auto;
+  filter: drop-shadow(0 16px 24px rgba(45, 34, 22, 0.14));
+}
+
+.benefit-food {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  transition: transform 260ms ease, opacity 220ms ease;
+}
+
+.benefit-food-main {
+  left: 50%;
+  top: 47%;
+  transform: translate(-50%, -50%) scale(1.12);
+}
+
+.benefit-food-side {
+  left: 36%;
+  top: 58%;
+  transform: translate(-50%, -50%) rotate(-14deg);
+}
+
+.benefit-food-accent {
+  left: 62%;
+  top: 61%;
+  transform: translate(-50%, -50%) rotate(12deg) scale(0.88);
+}
+
+.benefit-plate-copy span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--beet);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.benefit-plate-copy strong {
+  display: block;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(26px, 2.4vw, 36px);
+  font-weight: 400;
+  line-height: 1.06;
+}
+
+.benefit-plate-copy p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.benefit-plate-controls {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.benefit-plate-controls button {
+  border: 1px solid rgba(85, 63, 38, 0.18);
+  border-radius: 999px;
+  padding: 9px 12px;
+  color: var(--ink);
+  background: rgba(255, 249, 239, 0.72);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.benefit-plate-controls button.is-selected {
+  color: var(--milk);
+  border-color: var(--beet);
+  background: var(--beet);
+}
+
 .benefits-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -3609,6 +3714,7 @@ body[data-design-mode="starbucks"] .hero-design-shortcuts button:active {
   .sets-layout,
   .taste-finder,
   .taste-question,
+  .benefit-plate,
   .set-builder,
   .serving-picker,
   .pairing-grid,
@@ -3625,6 +3731,15 @@ body[data-design-mode="starbucks"] .hero-design-shortcuts button:active {
 
   .taste-question {
     align-items: start;
+  }
+
+  .benefit-plate-controls {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .benefit-plate-controls button {
+    width: 100%;
   }
 
   .serving-match {
