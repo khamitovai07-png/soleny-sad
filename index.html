@@ -24,7 +24,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
   <link rel="preload" href="assets/images/jars-luxury-studio.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=20260531-straight-product-labels">
+  <link rel="stylesheet" href="styles.css?v=20260531-interactive-suite">
   <link rel="stylesheet" href="craft.css?v=20260528-seo-speed">
   <script type="application/ld+json">
     {
@@ -507,6 +507,50 @@
       </div>
     </section>
 
+    <section class="section taste-finder-section" id="taste-finder">
+      <div class="section-heading compact-heading">
+        <p class="eyebrow">подбор вкуса</p>
+        <h2>Ответьте на три вопроса, и сайт подскажет баночки к вашему столу</h2>
+      </div>
+      <div class="taste-finder" data-taste-finder>
+        <div class="taste-questions" aria-label="Вопросы для подбора вкуса">
+          <div class="taste-question">
+            <span>01</span>
+            <strong>Какой вкус хочется?</strong>
+            <div class="taste-options" role="group" aria-label="Выбор вкуса">
+              <button class="is-selected" type="button" data-taste-answer="mood" data-value="sour">покислее</button>
+              <button type="button" data-taste-answer="mood" data-value="crunch">похрустеть</button>
+              <button type="button" data-taste-answer="mood" data-value="soft">мягкий</button>
+            </div>
+          </div>
+          <div class="taste-question">
+            <span>02</span>
+            <strong>К чему подать?</strong>
+            <div class="taste-options" role="group" aria-label="Выбор подачи">
+              <button class="is-selected" type="button" data-taste-answer="dish" data-value="potato">картофель</button>
+              <button type="button" data-taste-answer="dish" data-value="bread">хлеб</button>
+              <button type="button" data-taste-answer="dish" data-value="meat">мясо</button>
+            </div>
+          </div>
+          <div class="taste-question">
+            <span>03</span>
+            <strong>Настроение набора?</strong>
+            <div class="taste-options" role="group" aria-label="Выбор настроения">
+              <button class="is-selected" type="button" data-taste-answer="tone" data-value="classic">классика</button>
+              <button type="button" data-taste-answer="tone" data-value="gift">подарок</button>
+              <button type="button" data-taste-answer="tone" data-value="rare">редкое</button>
+            </div>
+          </div>
+        </div>
+        <aside class="taste-result" aria-live="polite">
+          <p>Вам подойдет</p>
+          <h3 data-taste-title>Свекла, огурцы и ассорти</h3>
+          <span data-taste-copy>Для первого заказа: кислинка, хруст и понятная подача к картофелю или хлебу.</span>
+          <a data-taste-link href="mailto:ira.xamitova@inbox.ru?subject=Подбор вкуса Соленый сад&body=Здравствуйте! Хочу набор: Свекла, огурцы и ассорти.">Заказать подбор</a>
+        </aside>
+      </div>
+    </section>
+
     <section class="section sets-section" id="sets">
       <div class="section-heading compact-heading">
         <p class="eyebrow">готовые сеты</p>
@@ -540,6 +584,35 @@
         <img src="assets/images/jars-gift-box.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="Подарочный набор маленьких баночек с ферментированными овощами в коробке">
         <figcaption>Подарочная коробка без лишнего декора: бумага, стекло, темная ткань и цвет овощей.</figcaption>
       </figure>
+
+      <div class="set-builder" data-set-builder>
+        <div>
+          <p class="eyebrow">конструктор набора</p>
+          <h3>Соберите свой ящик из любимых баночек</h3>
+          <p>Нажимайте на вкусы, а сайт соберет текст заказа. Можно добавить один вкус несколько раз.</p>
+        </div>
+        <div class="builder-options" aria-label="Добавить вкусы в набор">
+          <button type="button" data-builder-item="Свекла с хреном">Свекла</button>
+          <button type="button" data-builder-item="Огурцы с укропом">Огурцы</button>
+          <button type="button" data-builder-item="Капуста с тмином">Капуста</button>
+          <button type="button" data-builder-item="Соленые грибы">Грибы</button>
+          <button type="button" data-builder-item="Ассорти к русскому столу">Ассорти</button>
+          <button type="button" data-builder-item="Моченые яблоки">Яблоки</button>
+          <button type="button" data-builder-item="Терн ферментированный">Терн</button>
+          <button type="button" data-builder-item="Морковь с чесноком">Морковь</button>
+        </div>
+        <aside class="builder-crate" aria-live="polite">
+          <span data-builder-count>0 баночек</span>
+          <div class="crate-slots" aria-hidden="true">
+            <i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+          <p data-builder-summary>Пока ящик пуст. Добавьте первый вкус.</p>
+          <div class="builder-actions">
+            <button type="button" data-builder-clear>Очистить</button>
+            <a data-builder-order href="mailto:ira.xamitova@inbox.ru?subject=Свой набор Соленый сад&body=Здравствуйте! Хочу собрать свой набор. Интересуют вкусы:">Заказать набор</a>
+          </div>
+        </aside>
+      </div>
     </section>
 
     <section class="section gift-section" id="gifts">
@@ -599,6 +672,23 @@
             <strong>Подарочный стол</strong>
             <p>Несколько вкусов в коробке выглядят как готовый гастрономический подарок.</p>
           </article>
+        </div>
+      </div>
+      <div class="serving-picker" data-serving-picker>
+        <div class="serving-picker-copy">
+          <p class="eyebrow">интерактивная подача</p>
+          <h3>Выберите блюдо, и мы подсветим подходящие вкусы</h3>
+        </div>
+        <div class="serving-picker-buttons" role="group" aria-label="Выбор блюда для подачи">
+          <button class="is-selected" type="button" data-serving-choice="potato">картофель</button>
+          <button type="button" data-serving-choice="bread">ржаной хлеб</button>
+          <button type="button" data-serving-choice="meat">птица и мясо</button>
+          <button type="button" data-serving-choice="gift">подарочный стол</button>
+        </div>
+        <div class="serving-match" aria-live="polite">
+          <span data-serving-title>К картофелю</span>
+          <strong data-serving-items>Свекла, грибы и огурцы</strong>
+          <p data-serving-copy>Дают горячему блюду кислинку, хруст и ощущение собранного ужина.</p>
         </div>
       </div>
     </section>
@@ -680,6 +770,23 @@
           <i aria-hidden="true">+</i>
           <span>время</span>
           <small>без уксуса, красителей и лишней сладости</small>
+        </div>
+        <div class="ferment-timeline" data-ferment-timeline>
+          <div class="ferment-days" role="group" aria-label="Дни ферментации">
+            <button class="is-selected" type="button" data-ferment-day="0">день 1</button>
+            <button type="button" data-ferment-day="1">день 3</button>
+            <button type="button" data-ferment-day="2">день 7</button>
+          </div>
+          <div class="ferment-card" aria-live="polite">
+            <div class="ferment-jar" aria-hidden="true">
+              <span></span>
+              <i></i>
+            </div>
+            <div>
+              <strong data-ferment-title>Овощи дают сок</strong>
+              <p data-ferment-copy>Соль вытягивает влагу, специи раскрываются, будущий рассол становится живым.</p>
+            </div>
+          </div>
         </div>
       </div>
       <div class="serving-column">
@@ -1065,10 +1172,218 @@
     })();
 
     (() => {
+      const root = document.querySelector("[data-taste-finder]");
+      if (!root) return;
+
+      const answers = {
+        mood: "sour",
+        dish: "potato",
+        tone: "classic"
+      };
+      const title = root.querySelector("[data-taste-title]");
+      const copy = root.querySelector("[data-taste-copy]");
+      const link = root.querySelector("[data-taste-link]");
+
+      const recommendations = [
+        {
+          score: ({ mood, dish, tone }) =>
+            (mood === "sour" ? 3 : 0) + (dish === "potato" ? 3 : 0) + (tone === "classic" ? 2 : 0),
+          title: "Свекла, огурцы и ассорти",
+          copy: "Для первого заказа: кислинка, хруст и понятная подача к картофелю или хлебу."
+        },
+        {
+          score: ({ mood, dish, tone }) =>
+            (mood === "crunch" ? 3 : 0) + (dish === "bread" ? 2 : 0) + (tone === "classic" ? 1 : 0),
+          title: "Огурцы, капуста и морковь",
+          copy: "Хрустящий набор для быстрых закусок, завтрака с хлебом и простого ужина."
+        },
+        {
+          score: ({ mood, dish, tone }) =>
+            (mood === "soft" ? 2 : 0) + (dish === "meat" ? 3 : 0) + (tone === "gift" ? 2 : 0),
+          title: "Моченые яблоки, терн и морковь",
+          copy: "Мягкая кислинка и ягодная нота, которые хорошо балансируют птицу, мясо и сыр."
+        },
+        {
+          score: ({ mood, dish, tone }) =>
+            (tone === "rare" ? 4 : 0) + (dish === "meat" ? 1 : 0) + (mood === "sour" ? 1 : 0),
+          title: "Соленые грибы, терн и ассорти",
+          copy: "Более взрослый набор с лесным вкусом, темной ягодой и редкой партией."
+        }
+      ];
+
+      const updateRecommendation = () => {
+        const best = recommendations
+          .map((item) => ({ ...item, points: item.score(answers) }))
+          .sort((a, b) => b.points - a.points)[0];
+        title.textContent = best.title;
+        copy.textContent = best.copy;
+        const subject = encodeURIComponent("Подбор вкуса Соленый сад");
+        const body = encodeURIComponent(`Здравствуйте! Хочу набор: ${best.title}.`);
+        link.href = `mailto:ira.xamitova@inbox.ru?subject=${subject}&body=${body}`;
+      };
+
+      root.querySelectorAll("[data-taste-answer]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const group = button.dataset.tasteAnswer;
+          answers[group] = button.dataset.value;
+          root.querySelectorAll(`[data-taste-answer="${group}"]`).forEach((item) => {
+            item.classList.toggle("is-selected", item === button);
+          });
+          updateRecommendation();
+        });
+      });
+    })();
+
+    (() => {
+      const root = document.querySelector("[data-set-builder]");
+      if (!root) return;
+
+      const selected = [];
+      const count = root.querySelector("[data-builder-count]");
+      const summary = root.querySelector("[data-builder-summary]");
+      const order = root.querySelector("[data-builder-order]");
+      const slots = [...root.querySelectorAll(".crate-slots i")];
+      const optionButtons = [...root.querySelectorAll("[data-builder-item]")];
+
+      const formatCount = (value) => {
+        const last = value % 10;
+        const lastTwo = value % 100;
+        if (last === 1 && lastTwo !== 11) return `${value} баночка`;
+        if (last >= 2 && last <= 4 && (lastTwo < 12 || lastTwo > 14)) return `${value} баночки`;
+        return `${value} баночек`;
+      };
+
+      const updateBuilder = () => {
+        const totals = selected.reduce((map, item) => {
+          map.set(item, (map.get(item) || 0) + 1);
+          return map;
+        }, new Map());
+        const parts = [...totals].map(([name, amount]) => amount > 1 ? `${name} x${amount}` : name);
+
+        count.textContent = formatCount(selected.length);
+        summary.textContent = parts.length ? parts.join(", ") : "Пока ящик пуст. Добавьте первый вкус.";
+        slots.forEach((slot, index) => slot.classList.toggle("is-filled", index < Math.min(selected.length, slots.length)));
+        optionButtons.forEach((button) => button.classList.toggle("is-added", totals.has(button.dataset.builderItem)));
+
+        const body = parts.length
+          ? `Здравствуйте! Хочу собрать свой набор. Интересуют вкусы: ${parts.join(", ")}.`
+          : "Здравствуйте! Хочу собрать свой набор. Интересуют вкусы:";
+        order.href = `mailto:ira.xamitova@inbox.ru?subject=${encodeURIComponent("Свой набор Соленый сад")}&body=${encodeURIComponent(body)}`;
+      };
+
+      optionButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          selected.push(button.dataset.builderItem);
+          updateBuilder();
+        });
+      });
+
+      root.querySelector("[data-builder-clear]")?.addEventListener("click", () => {
+        selected.length = 0;
+        updateBuilder();
+      });
+    })();
+
+    (() => {
+      const root = document.querySelector("[data-serving-picker]");
+      if (!root) return;
+
+      const pairings = {
+        potato: {
+          title: "К картофелю",
+          items: "Свекла, грибы и огурцы",
+          copy: "Дают горячему блюду кислинку, хруст и ощущение собранного ужина.",
+          card: 0
+        },
+        bread: {
+          title: "К ржаному хлебу",
+          items: "Огурцы, капуста и морковь",
+          copy: "Подходят для завтрака, закуски с маслом и тарелки с зеленью.",
+          card: 1
+        },
+        meat: {
+          title: "К птице и мясу",
+          items: "Моченые яблоки, терн и морковь",
+          copy: "Балансируют плотные блюда без тяжелых соусов и лишней сладости.",
+          card: 2
+        },
+        gift: {
+          title: "На подарочный стол",
+          items: "Ассорти, терн и моченые яблоки",
+          copy: "Выглядят празднично и дают набору ощущение редкой маленькой партии.",
+          card: 3
+        }
+      };
+
+      const cards = [...document.querySelectorAll(".pairing-grid article")];
+      const title = root.querySelector("[data-serving-title]");
+      const items = root.querySelector("[data-serving-items]");
+      const copy = root.querySelector("[data-serving-copy]");
+
+      const setPairing = (key) => {
+        const next = pairings[key] || pairings.potato;
+        title.textContent = next.title;
+        items.textContent = next.items;
+        copy.textContent = next.copy;
+        root.querySelectorAll("[data-serving-choice]").forEach((button) => {
+          button.classList.toggle("is-selected", button.dataset.servingChoice === key);
+        });
+        cards.forEach((card, index) => card.classList.toggle("is-matched", index === next.card));
+      };
+
+      root.querySelectorAll("[data-serving-choice]").forEach((button) => {
+        button.addEventListener("click", () => setPairing(button.dataset.servingChoice));
+      });
+
+      setPairing("potato");
+    })();
+
+    (() => {
+      const root = document.querySelector("[data-ferment-timeline]");
+      if (!root) return;
+
+      const days = [
+        {
+          title: "Овощи дают сок",
+          copy: "Соль вытягивает влагу, специи раскрываются, будущий рассол становится живым.",
+          fill: "38%"
+        },
+        {
+          title: "Рассол начинает работать",
+          copy: "Появляется мягкая кислинка, овощи становятся плотнее и ароматнее.",
+          fill: "62%"
+        },
+        {
+          title: "Вкус становится собранным",
+          copy: "Кислинка, соль и специи приходят в баланс, баночку уже хочется поставить на стол.",
+          fill: "84%"
+        }
+      ];
+
+      const title = root.querySelector("[data-ferment-title]");
+      const copy = root.querySelector("[data-ferment-copy]");
+      const jar = root.querySelector(".ferment-jar");
+
+      const setDay = (index) => {
+        const next = days[index] || days[0];
+        title.textContent = next.title;
+        copy.textContent = next.copy;
+        jar.style.setProperty("--ferment-fill", next.fill);
+        root.querySelectorAll("[data-ferment-day]").forEach((button, current) => {
+          button.classList.toggle("is-selected", current === index);
+        });
+      };
+
+      root.querySelectorAll("[data-ferment-day]").forEach((button, index) => {
+        button.addEventListener("click", () => setDay(index));
+      });
+    })();
+
+    (() => {
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       const revealItems = [
         ...document.querySelectorAll(
-          ".intro-band, .section-heading, .benefits-grid article, .product-card, .set-panel, .gift-visual, .occasion-grid article, .serving-hero, .pairing-grid article, .tradition-formula, .story-list div, .delivery-grid div, .delivery-route li, .reviews-grid blockquote, .faq-note, .faq-list details, .contacts-grid a, .order-card"
+          ".intro-band, .section-heading, .benefits-grid article, .product-card, .taste-finder, .set-panel, .gift-visual, .set-builder, .occasion-grid article, .serving-hero, .pairing-grid article, .serving-picker, .tradition-formula, .ferment-timeline, .story-list div, .delivery-grid div, .delivery-route li, .reviews-grid blockquote, .faq-note, .faq-list details, .contacts-grid a, .order-card"
         )
       ];
 

@@ -57,6 +57,10 @@ html {
   .benefits-grid article,
   .product-card,
   .set-panel,
+  .taste-finder,
+  .set-builder,
+  .serving-picker,
+  .ferment-card,
   .craft-grid article,
   .occasion-grid article,
   .pairing-grid strong,
@@ -1458,6 +1462,176 @@ body[data-design-mode="starbucks"] .hero-design-shortcuts button.is-active {
   border-color: rgba(39, 34, 27, 0.22);
 }
 
+.taste-finder-section {
+  background:
+    radial-gradient(circle at 12% 16%, rgba(124, 45, 40, 0.08), transparent 28%),
+    linear-gradient(180deg, rgba(255, 249, 239, 0.8), rgba(240, 228, 211, 0.36)),
+    var(--paper);
+}
+
+.taste-finder {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
+.taste-questions {
+  display: grid;
+  gap: 14px;
+}
+
+.taste-question,
+.taste-result {
+  border: 1px solid rgba(85, 63, 38, 0.18);
+  border-radius: 10px;
+  background: rgba(255, 249, 239, 0.78);
+  box-shadow: 0 18px 44px rgba(45, 34, 22, 0.08);
+}
+
+.taste-question {
+  display: grid;
+  grid-template-columns: 58px minmax(170px, 0.55fr) minmax(260px, 1fr);
+  gap: 16px;
+  align-items: center;
+  padding: 18px;
+}
+
+.taste-question > span {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--milk);
+  background: var(--beet);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.taste-question strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(24px, 2vw, 32px);
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.taste-options,
+.serving-picker-buttons,
+.builder-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.taste-options button,
+.serving-picker-buttons button,
+.builder-options button,
+.ferment-days button,
+.builder-actions button {
+  border: 1px solid rgba(85, 63, 38, 0.18);
+  border-radius: 999px;
+  padding: 10px 13px;
+  color: var(--ink);
+  background: rgba(255, 249, 239, 0.74);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+}
+
+.taste-options button:hover,
+.serving-picker-buttons button:hover,
+.builder-options button:hover,
+.ferment-days button:hover,
+.builder-actions button:hover {
+  transform: translateY(-1px);
+}
+
+.taste-options button.is-selected,
+.serving-picker-buttons button.is-selected,
+.ferment-days button.is-selected {
+  color: var(--milk);
+  border-color: var(--beet);
+  background: var(--beet);
+}
+
+.taste-result {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 100%;
+  overflow: hidden;
+  padding: clamp(26px, 3vw, 42px);
+  background:
+    linear-gradient(135deg, rgba(39, 34, 27, 0.9), rgba(124, 45, 40, 0.76)),
+    var(--charcoal);
+  color: var(--milk);
+}
+
+.taste-result::before {
+  content: "";
+  position: absolute;
+  top: 22px;
+  right: 24px;
+  width: 86px;
+  height: 120px;
+  border: 1px solid rgba(255, 249, 239, 0.34);
+  border-radius: 18px 18px 26px 26px;
+  background:
+    linear-gradient(180deg, rgba(255, 249, 239, 0.18), transparent 24%),
+    radial-gradient(circle at 50% 78%, rgba(168, 137, 93, 0.38), transparent 42%);
+  opacity: 0.62;
+}
+
+.taste-result p {
+  margin: 0 0 12px;
+  color: rgba(255, 249, 239, 0.72);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.taste-result h3 {
+  position: relative;
+  margin: 0;
+  max-width: 520px;
+  font-size: clamp(34px, 4vw, 58px);
+  color: var(--milk);
+}
+
+.taste-result span {
+  position: relative;
+  display: block;
+  margin-top: 16px;
+  max-width: 520px;
+  color: rgba(255, 249, 239, 0.78);
+  line-height: 1.55;
+}
+
+.taste-result a,
+.builder-actions a {
+  position: relative;
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  margin-top: 24px;
+  border-radius: 6px;
+  padding: 0 16px;
+  color: var(--ink);
+  background: var(--milk);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+
 .sets-section {
   background:
     linear-gradient(180deg, rgba(255, 249, 239, 0.72), rgba(240, 228, 211, 0.42)),
@@ -1516,6 +1690,114 @@ body[data-design-mode="starbucks"] .hero-design-shortcuts button.is-active {
 
 .featured-set p {
   color: var(--muted);
+}
+
+.set-builder {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.75fr) minmax(320px, 1.15fr) minmax(280px, 0.8fr);
+  gap: 18px;
+  align-items: stretch;
+  margin-top: 22px;
+  border: 1px solid rgba(85, 63, 38, 0.2);
+  border-radius: 10px;
+  padding: clamp(20px, 3vw, 30px);
+  background:
+    linear-gradient(135deg, rgba(255, 249, 239, 0.82), rgba(234, 219, 199, 0.58)),
+    var(--milk);
+  box-shadow: 0 18px 44px rgba(45, 34, 22, 0.08);
+}
+
+.set-builder h3 {
+  margin: 0;
+  font-size: clamp(30px, 3vw, 46px);
+}
+
+.set-builder p:not(.eyebrow) {
+  margin: 14px 0 0;
+  color: var(--muted);
+  line-height: 1.52;
+}
+
+.builder-options {
+  align-content: start;
+}
+
+.builder-options button.is-added {
+  border-color: rgba(124, 45, 40, 0.38);
+  color: var(--beet);
+  background: rgba(124, 45, 40, 0.08);
+}
+
+.builder-crate {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 260px;
+  border: 1px solid rgba(85, 63, 38, 0.2);
+  border-radius: 8px;
+  padding: 18px;
+  background:
+    linear-gradient(180deg, rgba(118, 80, 47, 0.16), rgba(85, 63, 38, 0.08)),
+    rgba(255, 249, 239, 0.64);
+}
+
+.builder-crate > span {
+  color: var(--beet);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.crate-slots {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+  margin: 18px 0;
+}
+
+.crate-slots i {
+  height: 54px;
+  border: 1px dashed rgba(85, 63, 38, 0.26);
+  border-radius: 14px 14px 18px 18px;
+  background: rgba(255, 249, 239, 0.48);
+  transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.crate-slots i.is-filled {
+  border-style: solid;
+  border-color: rgba(124, 45, 40, 0.28);
+  background:
+    linear-gradient(180deg, rgba(39, 34, 27, 0.18) 0 18%, transparent 18%),
+    linear-gradient(180deg, rgba(255, 249, 239, 0.7), rgba(124, 45, 40, 0.22));
+  transform: translateY(-2px);
+}
+
+.builder-crate p {
+  min-height: 44px;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.builder-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.builder-actions button {
+  border-radius: 6px;
+  background: transparent;
+}
+
+.builder-actions a {
+  min-height: 40px;
+  margin: 0;
+  color: var(--milk);
+  background: var(--charcoal);
 }
 
 .craft-section {
@@ -1748,6 +2030,59 @@ body[data-design-mode="starbucks"] .hero-design-shortcuts button.is-active {
   line-height: 1.5;
 }
 
+.serving-picker {
+  display: grid;
+  grid-template-columns: minmax(250px, 0.7fr) minmax(320px, 1fr) minmax(300px, 0.9fr);
+  gap: 16px;
+  align-items: center;
+  margin-top: 20px;
+  border: 1px solid rgba(85, 63, 38, 0.18);
+  border-radius: 10px;
+  padding: 20px;
+  background: rgba(255, 249, 239, 0.72);
+  box-shadow: 0 18px 44px rgba(45, 34, 22, 0.08);
+}
+
+.serving-picker h3 {
+  margin: 0;
+  font-size: clamp(28px, 2.6vw, 40px);
+}
+
+.serving-match {
+  border-left: 1px solid rgba(124, 45, 40, 0.18);
+  padding-left: 20px;
+}
+
+.serving-match span {
+  display: block;
+  color: var(--beet);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.serving-match strong {
+  display: block;
+  margin-top: 7px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(26px, 2.5vw, 38px);
+  font-weight: 400;
+  line-height: 1.08;
+}
+
+.serving-match p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.pairing-grid article.is-matched {
+  border-color: rgba(124, 45, 40, 0.42);
+  box-shadow: 0 22px 60px rgba(124, 45, 40, 0.15);
+  transform: translateY(-3px);
+}
+
 .story-section {
   display: grid;
   grid-template-columns: minmax(320px, 0.74fr) minmax(420px, 1.26fr);
@@ -1809,6 +2144,87 @@ body[data-design-mode="starbucks"] .hero-design-shortcuts button.is-active {
   letter-spacing: 0.1em;
   text-align: center;
   text-transform: uppercase;
+}
+
+.ferment-timeline {
+  max-width: 650px;
+  margin-top: 16px;
+  border: 1px solid rgba(85, 63, 38, 0.18);
+  border-radius: 10px;
+  padding: 16px;
+  background: rgba(255, 249, 239, 0.66);
+  box-shadow: 0 18px 44px rgba(45, 34, 22, 0.08);
+}
+
+.ferment-days {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-bottom: 14px;
+}
+
+.ferment-card {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+}
+
+.ferment-jar {
+  position: relative;
+  display: grid;
+  width: 86px;
+  height: 118px;
+  place-items: end center;
+  border: 1px solid rgba(85, 63, 38, 0.22);
+  border-radius: 18px 18px 24px 24px;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255, 249, 239, 0.8), rgba(255, 249, 239, 0.38));
+}
+
+.ferment-jar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 18px;
+  right: 18px;
+  height: 16px;
+  border-radius: 0 0 7px 7px;
+  background: var(--charcoal);
+}
+
+.ferment-jar span {
+  width: 100%;
+  height: var(--ferment-fill, 38%);
+  background:
+    radial-gradient(circle at 28% 36%, rgba(255, 249, 239, 0.7) 0 5px, transparent 6px),
+    radial-gradient(circle at 66% 62%, rgba(255, 249, 239, 0.48) 0 4px, transparent 5px),
+    linear-gradient(180deg, rgba(168, 137, 93, 0.5), rgba(124, 45, 40, 0.42));
+  transition: height 320ms ease;
+}
+
+.ferment-jar i {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 24px;
+  height: 24px;
+  border: 1px solid rgba(85, 63, 38, 0.22);
+  border-radius: 3px;
+  background: rgba(255, 249, 239, 0.7);
+}
+
+.ferment-card strong {
+  display: block;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(26px, 2.3vw, 36px);
+  font-weight: 400;
+}
+
+.ferment-card p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  line-height: 1.5;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -2694,6 +3110,10 @@ body[data-design-mode="starbucks"] .hero-design-shortcuts button:active {
 
   .section-heading,
   .sets-layout,
+  .taste-finder,
+  .taste-question,
+  .set-builder,
+  .serving-picker,
   .pairing-grid,
   .story-list,
   .faq-layout,
@@ -2704,6 +3124,16 @@ body[data-design-mode="starbucks"] .hero-design-shortcuts button:active {
   .contacts-grid,
   .order-steps {
     grid-template-columns: 1fr;
+  }
+
+  .taste-question {
+    align-items: start;
+  }
+
+  .serving-match {
+    border-left: 0;
+    border-top: 1px solid rgba(124, 45, 40, 0.18);
+    padding: 18px 0 0;
   }
 
   .product-grid {
@@ -2856,6 +3286,41 @@ body[data-design-mode="starbucks"] .hero-design-shortcuts button:active {
 
   .sets-layout {
     gap: 12px;
+  }
+
+  .taste-question,
+  .set-builder,
+  .serving-picker,
+  .ferment-card {
+    grid-template-columns: 1fr;
+  }
+
+  .taste-question > span {
+    width: 38px;
+    height: 38px;
+  }
+
+  .taste-result {
+    min-height: 360px;
+  }
+
+  .builder-options,
+  .serving-picker-buttons,
+  .taste-options,
+  .ferment-days {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .builder-options button,
+  .serving-picker-buttons button,
+  .taste-options button,
+  .ferment-days button {
+    width: 100%;
+  }
+
+  .crate-slots {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .gift-visual img {
