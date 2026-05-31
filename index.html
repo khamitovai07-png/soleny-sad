@@ -24,7 +24,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
   <link rel="preload" href="assets/images/jars-luxury-studio.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=20260601-header-cart">
+  <link rel="stylesheet" href="styles.css?v=20260601-fixed-design-switcher">
   <link rel="stylesheet" href="craft.css?v=20260528-seo-speed">
   <script type="application/ld+json">
     {
@@ -172,6 +172,18 @@
     </div>
   </header>
 
+  <div class="design-switcher-bar" aria-label="Переключить дизайн страницы">
+    <div class="hero-design-shortcuts">
+      <span class="design-drag-handle">Версии дизайна</span>
+      <button class="is-active" type="button" aria-pressed="true" data-design-jump="original">Сад</button>
+      <button type="button" aria-pressed="false" data-design-jump="starbucks">Starbucks</button>
+      <button type="button" aria-pressed="false" data-design-jump="airtable">Airtable</button>
+      <button type="button" aria-pressed="false" data-design-jump="bugatti">Bugatti</button>
+      <button type="button" aria-pressed="false" data-design-jump="clickhouse">ClickHouse</button>
+      <button type="button" aria-pressed="false" data-design-jump="garden-lab">Свой</button>
+    </div>
+  </div>
+
   <main id="top">
     <section class="hero">
       <div class="hero-copy">
@@ -182,15 +194,6 @@
           Свекла, соленые огурцы, квашеная капуста, ассорти, моченые яблоки, терн и соленые грибы в прозрачном стекле:
           темная ткань на крышке, тонкая веревка и аккуратная наклейка с названием вкуса.
         </p>
-        <div class="hero-design-shortcuts" aria-label="Переключить дизайн страницы" data-draggable-design-panel>
-          <span class="design-drag-handle">Версии дизайна</span>
-          <button class="is-active" type="button" aria-pressed="true" data-design-jump="original">Сад</button>
-          <button type="button" aria-pressed="false" data-design-jump="starbucks">Starbucks</button>
-          <button type="button" aria-pressed="false" data-design-jump="airtable">Airtable</button>
-          <button type="button" aria-pressed="false" data-design-jump="bugatti">Bugatti</button>
-          <button type="button" aria-pressed="false" data-design-jump="clickhouse">ClickHouse</button>
-          <button type="button" aria-pressed="false" data-design-jump="garden-lab">Свой</button>
-        </div>
         <div class="hero-notes" aria-label="Особенности продукта">
           <span>стекло 180-250 мл</span>
           <span>без уксуса</span>
@@ -1048,134 +1051,6 @@
 
       const fromQuery = new URLSearchParams(window.location.search).get("design");
       setDesignMode(fromQuery || readRememberedMode() || "original");
-    })();
-
-    (() => {
-      const panel = document.querySelector("[data-draggable-design-panel]");
-      const hero = document.querySelector(".hero");
-      if (!panel || !hero) return;
-
-      const storageKey = "soleny-sad-design-panel-position-v3";
-      window.localStorage.removeItem("soleny-sad-design-panel-position");
-      window.localStorage.removeItem("soleny-sad-design-panel-position-v2");
-      const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
-
-      const placePanel = (left, top) => {
-        const heroRect = hero.getBoundingClientRect();
-        const panelRect = panel.getBoundingClientRect();
-        const safeLeft = clamp(left, 8, heroRect.width - panelRect.width - 8);
-        const safeTop = clamp(top, 8, heroRect.height - panelRect.height - 8);
-        panel.style.setProperty("--design-panel-left", `${safeLeft}px`);
-        panel.style.setProperty("--design-panel-top", `${safeTop}px`);
-        panel.classList.add("is-moved");
-        return { left: safeLeft, top: safeTop };
-      };
-
-      try {
-        const saved = JSON.parse(window.localStorage.getItem(storageKey));
-        if (saved && Number.isFinite(saved.left) && Number.isFinite(saved.top)) {
-          placePanel(saved.left, saved.top);
-        }
-      } catch {
-        window.localStorage.removeItem(storageKey);
-      }
-
-      let dragState = null;
-      let suppressClick = false;
-
-      panel.addEventListener("click", (event) => {
-        if (!suppressClick) return;
-        event.preventDefault();
-        event.stopPropagation();
-        suppressClick = false;
-      }, true);
-
-      panel.addEventListener("dragstart", (event) => {
-        event.preventDefault();
-      });
-
-      const stopDrag = () => {
-        if (!dragState) return;
-        const shouldSuppressClick = dragState.shouldSuppressClick;
-        const pointerId = dragState.pointerId;
-        const clickedButton = dragState.clickedButton;
-        dragState = null;
-        panel.classList.remove("is-dragging");
-        document.body.classList.remove("is-design-panel-dragging");
-        if (panel.hasPointerCapture?.(pointerId)) {
-          panel.releasePointerCapture(pointerId);
-        }
-        window.removeEventListener("pointermove", movePanel);
-        window.removeEventListener("pointerup", stopDrag);
-        window.removeEventListener("pointercancel", stopDrag);
-        window.removeEventListener("blur", stopDrag);
-        if (!shouldSuppressClick && clickedButton) {
-          suppressClick = true;
-          window.setSolenySadDesignMode?.(clickedButton.dataset.designJump);
-          return;
-        }
-        suppressClick = shouldSuppressClick;
-      };
-
-      const movePanel = (event) => {
-        if (!dragState) return;
-        if (event.pointerId !== dragState.pointerId) return;
-        if (event.pointerType === "mouse" && event.buttons !== 1) {
-          stopDrag();
-          return;
-        }
-
-        const distance = Math.hypot(event.clientX - dragState.startX, event.clientY - dragState.startY);
-        if (!dragState.didDrag && distance < 18) return;
-
-        event.preventDefault();
-        dragState.didDrag = true;
-        dragState.shouldSuppressClick = true;
-        panel.classList.add("is-dragging");
-        document.body.classList.add("is-design-panel-dragging");
-
-        const heroRect = hero.getBoundingClientRect();
-        const next = placePanel(
-          event.clientX - heroRect.left - dragState.grabOffsetX,
-          event.clientY - heroRect.top - dragState.grabOffsetY
-        );
-        window.localStorage.setItem(storageKey, JSON.stringify(next));
-      };
-
-      panel.addEventListener("pointerdown", (event) => {
-        if (event.button !== 0 && event.pointerType === "mouse") return;
-        if (dragState) stopDrag();
-        event.preventDefault();
-        event.stopPropagation();
-        const heroRect = hero.getBoundingClientRect();
-        const panelRect = panel.getBoundingClientRect();
-
-        dragState = {
-          pointerId: event.pointerId,
-          didDrag: false,
-          shouldSuppressClick: false,
-          clickedButton: event.target.closest("[data-design-jump]"),
-          grabOffsetX: event.clientX - panelRect.left,
-          grabOffsetY: event.clientY - panelRect.top,
-          startX: event.clientX,
-          startY: event.clientY
-        };
-        panel.setPointerCapture?.(event.pointerId);
-        window.addEventListener("pointermove", movePanel, { passive: false });
-        window.addEventListener("pointerup", stopDrag);
-        window.addEventListener("pointercancel", stopDrag);
-        window.addEventListener("blur", stopDrag);
-      }, true);
-
-      window.addEventListener("resize", () => {
-        if (!panel.classList.contains("is-moved")) return;
-        const currentLeft = parseFloat(panel.style.getPropertyValue("--design-panel-left"));
-        const currentTop = parseFloat(panel.style.getPropertyValue("--design-panel-top"));
-        if (Number.isFinite(currentLeft) && Number.isFinite(currentTop)) {
-          const next = placePanel(currentLeft, currentTop);
-          window.localStorage.setItem(storageKey, JSON.stringify(next));
-        }
-      });
     })();
 
     (() => {
