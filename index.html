@@ -960,6 +960,7 @@
 
   <aside class="cart-widget" data-cart-widget aria-label="Корзина заказа">
     <button class="cart-toggle" type="button" data-cart-toggle aria-expanded="false">
+      <span class="cart-icon" aria-hidden="true">▱</span>
       <span>Корзина</span>
       <strong data-cart-badge>0</strong>
     </button>
@@ -1401,7 +1402,6 @@
           button.textContent = "Добавить в корзину";
         }, 900);
         renderCart();
-        openCart();
       };
 
       addButtons.forEach((button) => {

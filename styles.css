@@ -1474,10 +1474,10 @@ body[data-design-mode="starbucks"] .hero-design-shortcuts button.is-active {
 
 .cart-widget {
   position: fixed;
-  z-index: 40;
-  right: 22px;
-  bottom: 22px;
-  width: min(390px, calc(100vw - 32px));
+  z-index: 80;
+  top: 92px;
+  right: 24px;
+  width: min(420px, calc(100vw - 32px));
   pointer-events: none;
 }
 
@@ -1487,41 +1487,62 @@ body[data-design-mode="starbucks"] .hero-design-shortcuts button.is-active {
 }
 
 .cart-toggle {
-  min-height: 52px;
+  min-height: 46px;
   margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 12px;
-  border: 1px solid rgba(255, 249, 239, 0.2);
+  gap: 9px;
+  border: 1px solid rgba(85, 63, 38, 0.2);
   border-radius: 999px;
-  padding: 8px 9px 8px 18px;
-  color: var(--milk);
-  background: var(--charcoal);
-  box-shadow: 0 18px 48px rgba(39, 34, 27, 0.22);
+  padding: 6px 7px 6px 14px;
+  color: var(--ink);
+  background:
+    linear-gradient(180deg, rgba(255, 249, 239, 0.96), rgba(240, 228, 211, 0.92)),
+    var(--milk);
+  box-shadow: 0 14px 34px rgba(39, 34, 27, 0.14);
   font: inherit;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 900;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
 }
 
+.cart-icon {
+  width: 22px;
+  height: 20px;
+  display: inline-grid;
+  place-items: center;
+  border: 2px solid currentColor;
+  border-top: 0;
+  border-radius: 0 0 5px 5px;
+  color: var(--beet);
+  font-size: 0;
+}
+
+.cart-icon::before {
+  content: "";
+  width: 12px;
+  height: 7px;
+  border: 2px solid currentColor;
+  border-bottom: 0;
+  border-radius: 9px 9px 0 0;
+  transform: translateY(-12px);
+}
+
 .cart-toggle strong {
-  min-width: 34px;
-  height: 34px;
+  min-width: 30px;
+  height: 30px;
   display: grid;
   place-items: center;
   border-radius: 50%;
-  color: var(--ink);
-  background: var(--milk);
-}
-
-.cart-widget.is-open .cart-toggle {
-  display: none;
+  color: var(--milk);
+  background: var(--beet);
 }
 
 .cart-panel {
   display: none;
+  margin-top: 10px;
   overflow: hidden;
   border: 1px solid rgba(85, 63, 38, 0.18);
   border-radius: 12px;
@@ -1685,6 +1706,11 @@ body[data-design-mode="bugatti"] .cart-toggle strong,
 body[data-design-mode="clickhouse"] .cart-toggle strong {
   color: #ffffff;
   background: #0a0a0a;
+}
+
+body[data-design-mode="bugatti"] .cart-icon,
+body[data-design-mode="clickhouse"] .cart-icon {
+  color: #0a0a0a;
 }
 
 body[data-design-mode="bugatti"] .cart-panel,
@@ -3588,9 +3614,14 @@ body[data-design-mode="starbucks"] .hero-design-shortcuts button:active {
   }
 
   .cart-widget {
+    top: 132px;
     right: 12px;
-    bottom: 12px;
     width: calc(100vw - 24px);
+  }
+
+  .cart-toggle {
+    min-height: 42px;
+    padding-left: 12px;
   }
 
   .cart-list {
