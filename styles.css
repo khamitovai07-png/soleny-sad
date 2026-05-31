@@ -1477,6 +1477,7 @@ body[data-design-mode="starbucks"] .hero-design-shortcuts button.is-active {
   z-index: 80;
   top: 92px;
   right: 24px;
+  bottom: auto;
   width: min(420px, calc(100vw - 32px));
   pointer-events: none;
 }
@@ -1550,6 +1551,10 @@ body[data-design-mode="starbucks"] .hero-design-shortcuts button.is-active {
     linear-gradient(180deg, rgba(255, 249, 239, 0.96), rgba(240, 228, 211, 0.94)),
     var(--milk);
   box-shadow: 0 28px 80px rgba(39, 34, 27, 0.24);
+}
+
+.cart-widget:not(.is-open) .cart-panel {
+  display: none !important;
 }
 
 .cart-widget.is-open .cart-panel {
