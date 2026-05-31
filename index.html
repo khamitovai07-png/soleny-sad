@@ -24,7 +24,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
   <link rel="preload" href="assets/images/jars-luxury-studio.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="styles.css?v=20260531-interactive-suite">
+  <link rel="stylesheet" href="styles.css?v=20260531-cart-shop">
   <link rel="stylesheet" href="craft.css?v=20260528-seo-speed">
   <script type="application/ld+json">
     {
@@ -269,7 +269,7 @@
             </div>
             <div class="product-footer">
               <span>390 ₽</span>
-              <a href="mailto:ira.xamitova@inbox.ru?subject=Заказ: Свекла с хреном&body=Здравствуйте! Хочу заказать баночку: Свекла с хреном, 220 мл." aria-label="Заказать свеклу с хреном">Заказать</a>
+              <button type="button" data-cart-add data-name="Свекла с хреном" data-volume="220 мл" data-price="390">Добавить в корзину</button>
             </div>
           </div>
         </article>
@@ -302,7 +302,7 @@
             </div>
             <div class="product-footer">
               <span>360 ₽</span>
-              <a href="mailto:ira.xamitova@inbox.ru?subject=Заказ: Огурцы с укропом&body=Здравствуйте! Хочу заказать баночку: Огурцы с укропом, 220 мл." aria-label="Заказать огурцы с укропом">Заказать</a>
+              <button type="button" data-cart-add data-name="Огурцы с укропом" data-volume="220 мл" data-price="360">Добавить в корзину</button>
             </div>
           </div>
         </article>
@@ -335,7 +335,7 @@
             </div>
             <div class="product-footer">
               <span>340 ₽</span>
-              <a href="mailto:ira.xamitova@inbox.ru?subject=Заказ: Капуста с тмином&body=Здравствуйте! Хочу заказать баночку: Капуста с тмином, 250 мл." aria-label="Заказать капусту с тмином">Заказать</a>
+              <button type="button" data-cart-add data-name="Капуста с тмином" data-volume="250 мл" data-price="340">Добавить в корзину</button>
             </div>
           </div>
         </article>
@@ -368,7 +368,7 @@
             </div>
             <div class="product-footer">
               <span>460 ₽</span>
-              <a href="mailto:ira.xamitova@inbox.ru?subject=Заказ: Соленые грибы&body=Здравствуйте! Хочу заказать баночку: Соленые грибы." aria-label="Заказать соленые грибы">Заказать</a>
+              <button type="button" data-cart-add data-name="Соленые грибы" data-volume="сезонный вкус" data-price="460">Добавить в корзину</button>
             </div>
           </div>
         </article>
@@ -401,7 +401,7 @@
             </div>
             <div class="product-footer">
               <span>430 ₽</span>
-              <a href="mailto:ira.xamitova@inbox.ru?subject=Заказ: Ассорти к русскому столу&body=Здравствуйте! Хочу заказать баночку: Ассорти к русскому столу, 250 мл." aria-label="Заказать ассорти к русскому столу">Заказать</a>
+              <button type="button" data-cart-add data-name="Ассорти к русскому столу" data-volume="250 мл" data-price="430">Добавить в корзину</button>
             </div>
           </div>
         </article>
@@ -434,7 +434,7 @@
             </div>
             <div class="product-footer">
               <span>440 ₽</span>
-              <a href="mailto:ira.xamitova@inbox.ru?subject=Заказ: Моченые яблоки&body=Здравствуйте! Хочу заказать баночку: Моченые яблоки, 250 мл." aria-label="Заказать моченые яблоки">Заказать</a>
+              <button type="button" data-cart-add data-name="Моченые яблоки" data-volume="250 мл" data-price="440">Добавить в корзину</button>
             </div>
           </div>
         </article>
@@ -467,7 +467,7 @@
             </div>
             <div class="product-footer">
               <span>520 ₽</span>
-              <a href="mailto:ira.xamitova@inbox.ru?subject=Заказ: Терн ферментированный&body=Здравствуйте! Хочу заказать баночку: Терн ферментированный." aria-label="Заказать ферментированный терн">Заказать</a>
+              <button type="button" data-cart-add data-name="Терн ферментированный" data-volume="редкая партия" data-price="520">Добавить в корзину</button>
             </div>
           </div>
         </article>
@@ -500,7 +500,7 @@
             </div>
             <div class="product-footer">
               <span>350 ₽</span>
-              <a href="mailto:ira.xamitova@inbox.ru?subject=Заказ: Морковь с чесноком&body=Здравствуйте! Хочу заказать баночку: Морковь с чесноком, 220 мл." aria-label="Заказать морковь с чесноком">Заказать</a>
+              <button type="button" data-cart-add data-name="Морковь с чесноком" data-volume="220 мл" data-price="350">Добавить в корзину</button>
             </div>
           </div>
         </article>
@@ -958,6 +958,34 @@
     </section>
   </main>
 
+  <aside class="cart-widget" data-cart-widget aria-label="Корзина заказа">
+    <button class="cart-toggle" type="button" data-cart-toggle aria-expanded="false">
+      <span>Корзина</span>
+      <strong data-cart-badge>0</strong>
+    </button>
+    <div class="cart-panel" data-cart-panel aria-live="polite">
+      <div class="cart-head">
+        <div>
+          <p class="eyebrow">ваш заказ</p>
+          <h2>Корзина</h2>
+        </div>
+        <button type="button" data-cart-close aria-label="Свернуть корзину">×</button>
+      </div>
+      <div class="cart-empty" data-cart-empty>
+        Добавьте баночки из витрины, и они появятся здесь.
+      </div>
+      <div class="cart-list" data-cart-list></div>
+      <div class="cart-total">
+        <span data-cart-total-count>0 баночек</span>
+        <strong data-cart-total-price>0 ₽</strong>
+      </div>
+      <div class="cart-actions">
+        <button type="button" data-cart-clear>Очистить</button>
+        <a data-cart-checkout href="mailto:ira.xamitova@inbox.ru?subject=Заказ Соленый сад&body=Здравствуйте! Хочу сделать заказ.">Оформить заказ</a>
+      </div>
+    </div>
+  </aside>
+
   <footer class="site-footer">
     <div>
       <a class="brand" href="#top">Соленый сад</a>
@@ -1282,6 +1310,131 @@
         selected.length = 0;
         updateBuilder();
       });
+    })();
+
+    (() => {
+      const widget = document.querySelector("[data-cart-widget]");
+      const addButtons = [...document.querySelectorAll("[data-cart-add]")];
+      if (!widget || !addButtons.length) return;
+
+      const toggle = widget.querySelector("[data-cart-toggle]");
+      const close = widget.querySelector("[data-cart-close]");
+      const badge = widget.querySelector("[data-cart-badge]");
+      const list = widget.querySelector("[data-cart-list]");
+      const empty = widget.querySelector("[data-cart-empty]");
+      const totalCount = widget.querySelector("[data-cart-total-count]");
+      const totalPrice = widget.querySelector("[data-cart-total-price]");
+      const checkout = widget.querySelector("[data-cart-checkout]");
+      const clear = widget.querySelector("[data-cart-clear]");
+      const cart = new Map();
+
+      const formatCount = (value) => {
+        const last = value % 10;
+        const lastTwo = value % 100;
+        if (last === 1 && lastTwo !== 11) return `${value} баночка`;
+        if (last >= 2 && last <= 4 && (lastTwo < 12 || lastTwo > 14)) return `${value} баночки`;
+        return `${value} баночек`;
+      };
+
+      const openCart = () => {
+        widget.classList.add("is-open");
+        toggle.setAttribute("aria-expanded", "true");
+      };
+
+      const closeCart = () => {
+        widget.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+      };
+
+      const buildMailto = (items, count, total) => {
+        const lines = items.map((item) => `- ${item.name}, ${item.volume}: ${item.quantity} шт. x ${item.price} ₽`);
+        const body = [
+          "Здравствуйте! Хочу сделать заказ:",
+          ...lines,
+          "",
+          `Итого: ${formatCount(count)}, ${total} ₽.`,
+          "Подскажите, пожалуйста, наличие и доставку."
+        ].join("\n");
+        return `mailto:ira.xamitova@inbox.ru?subject=${encodeURIComponent("Заказ Соленый сад")}&body=${encodeURIComponent(body)}`;
+      };
+
+      const renderCart = () => {
+        const items = [...cart.values()];
+        const count = items.reduce((sum, item) => sum + item.quantity, 0);
+        const total = items.reduce((sum, item) => sum + item.quantity * item.price, 0);
+
+        widget.classList.toggle("is-empty", count === 0);
+        empty.hidden = count !== 0;
+        badge.textContent = count;
+        totalCount.textContent = formatCount(count);
+        totalPrice.textContent = `${total} ₽`;
+        checkout.href = buildMailto(items, count, total);
+
+        list.innerHTML = items.map((item) => `
+          <div class="cart-line" data-cart-line="${item.name}">
+            <div>
+              <strong>${item.name}</strong>
+              <span>${item.volume} · ${item.price} ₽</span>
+            </div>
+            <div class="cart-controls" aria-label="Количество: ${item.name}">
+              <button type="button" data-cart-minus="${item.name}" aria-label="Убрать одну баночку">−</button>
+              <b>${item.quantity}</b>
+              <button type="button" data-cart-plus="${item.name}" aria-label="Добавить еще одну баночку">+</button>
+            </div>
+          </div>
+        `).join("");
+      };
+
+      const addItem = (button) => {
+        const name = button.dataset.name;
+        const price = Number(button.dataset.price);
+        const volume = button.dataset.volume;
+        if (!name || !Number.isFinite(price)) return;
+
+        const item = cart.get(name) || { name, price, volume, quantity: 0 };
+        item.quantity += 1;
+        cart.set(name, item);
+        button.classList.add("is-added");
+        button.textContent = "В корзине";
+        window.setTimeout(() => {
+          button.classList.remove("is-added");
+          button.textContent = "Добавить в корзину";
+        }, 900);
+        renderCart();
+        openCart();
+      };
+
+      addButtons.forEach((button) => {
+        button.addEventListener("click", () => addItem(button));
+      });
+
+      list.addEventListener("click", (event) => {
+        const minus = event.target.closest("[data-cart-minus]");
+        const plus = event.target.closest("[data-cart-plus]");
+        const name = minus?.dataset.cartMinus || plus?.dataset.cartPlus;
+        if (!name || !cart.has(name)) return;
+
+        const item = cart.get(name);
+        item.quantity += plus ? 1 : -1;
+        if (item.quantity <= 0) {
+          cart.delete(name);
+        } else {
+          cart.set(name, item);
+        }
+        renderCart();
+      });
+
+      toggle.addEventListener("click", () => {
+        widget.classList.toggle("is-open");
+        toggle.setAttribute("aria-expanded", String(widget.classList.contains("is-open")));
+      });
+      close.addEventListener("click", closeCart);
+      clear.addEventListener("click", () => {
+        cart.clear();
+        renderCart();
+      });
+
+      renderCart();
     })();
 
     (() => {
